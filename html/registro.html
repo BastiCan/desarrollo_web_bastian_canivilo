@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html lang="es"> 
 <head>
-    <title> Registros </title>    
+    <title> Registros </title>
+    <link rel="stylesheet" type="text/css" href="../css/registro.css">    
 </head>
 <body>
     <div class="container">
         <div class="texto">
-            <h1> :3  <h1>
-            <h2> LOLLLLLLLLLLLLLLLLLLLLLLLLL </h2>
+            <h1> Registro Voluntario  <h1>
+                
         </div>
+        <form class="formulario" id="login-form">
+            <div id="nombre-input" class="grupo-input">
+                <label for="nombre"> Nombre </label>
+                <input id="nombre" name="nombre" type="nombre" required>
+            </div>
+            <div id="rut-input" class="grupo-input">
+                <label for="rut"> Rut </label>
+                <input id="rut" name="rut" type="rut" required>
+            </div>
+            <div id="mail-input" class="grupo-input">
+                <label for="email"> Email </label>
+                <input id="email" name="email" type="email" required>
+            </div>
+            <div id="telefono-input" class="grupo-input">
+                <label for="telefono"> Telefono </label>
+                <input id="telefono" name="telefono" type="telefono" required>
+            </div>
+            <div id="region-input" class="grupo-input">
+                <label for="region"> Región </label>
+                <input id="region" name="region" type="region" required>
+            </div>
+            <div id="comuna-input" class="grupo-input">
+                <label for="comuna"> Comuna </label>
+                <input id="comuna" name="comuna" type="comuna" required>
+            </div>
+            <div id="calle_numero-input" class="grupo-input">
+                <label for="calle_numero"> Calle y Número </label>
+                <input id="calle_numero" name="calle_numero" type="calle_numero" required>
+            </div>
+            <div class="botones"> 
+                <button id="envio" type="button"> Registrarse </button>
+            </div>
+        </form>
     </div>
+    <script lang="javascript" src="../js/registro.js"></script>
 </body>
 </html>

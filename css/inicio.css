@@ -37,6 +37,51 @@ label {
   background-color: #1177bb;
 }
 
+#avistamiento {
+  background-color: #4bb4f8;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  padding: 2% 5%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#avistamiento:hover {
+  background-color: #1177bb;
+}
+
+#listado {
+  background-color: #4bb4f8;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  padding: 2% 5%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#listado:hover {
+  background-color: #1177bb;
+}
+
+#estadistica {
+  background-color: #4bb4f8;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  padding: 2% 5%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#estadistica:hover {
+  background-color: #1177bb;
+}
+
 label > input {
   width: 100%;
   margin-top: 1rem;

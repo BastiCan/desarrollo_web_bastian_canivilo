@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="es"> 
 <head>
-    <title> Avistamientos </title>    
+    <title> Avistamientos </title>
+    <link rel="stylesheet" type="text/css" href="../css/avistamiento.css"> 
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <div class="texto">
-            <h1> :33333  <h1>
-            <h2> LULLLLLLLLLLLLLLLLLLLLLL </h2>
+            <h1> Informar Avistamiento  <h1>
+        </div>
+        <form class="formulario" id="avist-form">
+            <div id="tipo-input" class="grupo-input">
+                <label for="tipo"> Tipo </label>
+                <input id="tipo" name="tipo" type="tipo" required>
+            </div>
+            <div id="nombre-input" class="grupo-input">
+                <label for="nombre"> Nombre </label>
+                <input id="nombre" name="nombre" type="nombre" required> 
+            </div>
+            <div id="lugar-input" class="grupo-input">
+                <label for="lugar"> Lugar </label>
+                <input id="lugar" name="lugar" type="lugar" required>
+            </div>
+            <div id="fecha-input" class="grupo-input">
+                <label for="fecha"> Fecha </label>
+                <input id="fecha" name="fecha" type="fecha" required>
+            </div>
+            <div id="hora-input" class="grupo-input">
+                <label for="hora"> Hora </label>
+                <input id="hora" name="hora" type="hora" required>        
+        </form>
+    </div>
+    <div class="container">
+        <div id="foto_video-input" class="imagen-input">
+            <label for="foto_video"> Foto o Video </label>
+            <input id="foto_video" name="foto_video" type="foto_video" required>
         </div>
     </div>
 </body>

@@ -6,10 +6,11 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="texto">
-            <h1> Informar Avistamiento  <h1>
-        </div>
-        <form class="formulario" id="avist-form">
+        <div class="Informacion">
+            <div>
+                <h1> Informar Avistamiento  </h1>
+            </div>
+            <form class="formulario" id="avist-form">
             <div id="tipo-input" class="grupo-input">
                 <label for="tipo"> Tipo </label>
                 <input id="tipo" name="tipo" type="tipo" required>
@@ -29,13 +30,18 @@
             <div id="hora-input" class="grupo-input">
                 <label for="hora"> Hora </label>
                 <input id="hora" name="hora" type="hora" required>        
-        </form>
-    </div>
-    <div class="container">
-        <div id="foto_video-input" class="imagen-input">
-            <label for="foto_video"> Foto o Video </label>
-            <input id="foto_video" name="foto_video" type="foto_video" required>
+            </form>
+        </div>
+        <div class="prueba-visual">
+            <div id="foto_video-input" class="imagen-input">
+                <label for="foto_video"> Foto o Video </label>
+                <input id="foto_video" name="foto_video" type="foto_video" required>
+            </div>
+        </div>
+        <div class="boton">
+            <button id="envio" type="button"> Agregar Avistamiento </button>
         </div>
     </div>
+    <script lang="javascript" src="../js/avistamiento.js"></script>
 </body>
 </html>

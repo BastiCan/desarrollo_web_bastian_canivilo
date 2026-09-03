@@ -31,7 +31,27 @@ input[type="nombre"],
 input[type="lugar"],
 input[type="fecha"],
 input[type="hora"],
-input[type="archivo"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    color: #333;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    padding-right: 30px;
+}
 
 input[type="archivo"] {
     padding: 5px 8px;

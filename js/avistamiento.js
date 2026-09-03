@@ -33,9 +33,9 @@ const validarHora = (hora) => {
     return largoValido && formatoValido;
 };
 
-const validarArchivo = (archivo) => { //Es lo que se adjunta foto o video 
-    if (!archivo) return false;
-    let largoValido = 1 <= archivo.length && archivo.length <= 3; //Más de uno
+const validarArchivo = (archivos) => { //Es lo que se adjunta foto o video 
+    if (!archivos) return false;
+    let largoValido = 1 <= archivos.length && archivos.length <= 3; //Más de uno
     let tipoValido = true;
     for (const archivo of archivos){ //Ver si es una imagen o video 
         let familiaDeArchivo = archivo.type.split("/")[0];
@@ -53,7 +53,7 @@ const validarForm = () => {
     let lugar = formulario["lugar"].value;
     let fecha = formulario["fecha"].value;
     let hora = formulario["hora"].value;
-    let archivos = formulario["archivos"].value;
+    let archivos = formulario["archivos"].files;
 
     //Variables auxiliares
     let inputsInvalidos = []; 
@@ -120,7 +120,7 @@ const validarForm = () => {
         submitButton.innerText = "Enviar";
         submitButton.style.marginRight = "10px";
         submitButton.addEventListener("click", () =>{
-            //base de datos
+            window.location.href = "../html/inicio.html";
         });
 
         let backButton = document.createElement("boton");

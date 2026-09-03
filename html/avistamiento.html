@@ -7,7 +7,7 @@
 <body>
     <div class="main-container">
         <div id="title">
-            <h1> Informar Avistamiento  </h1>
+            <h1> Informar Avistamiento </h1>
         </div>
         <div id="val-box" hidden>
             <h2 id="val-msg"></h2>
@@ -30,11 +30,9 @@
             <input id="hora" name="hora" type="hora" required><br>        
         
             <label for="archivos"> Foto o Video </label>
-            <input id="archivos" name="archivo" type="archivo" multiple accept="image/*,video/*" required><br>
-            
-            <div>
-                <button id="submit-btn" type="button"> Agregar Avistamiento </button>
-            </div>
+            <input id="archivos" name="archivo" type="file" multiple accept="image/*,video/*" required><br>
+        
+            <button id="submit-btn" type="button"> Agregar Avistamiento </button>
         </form>
     </div>
     <script lang="javascript" src="../js/avistamiento.js"></script>

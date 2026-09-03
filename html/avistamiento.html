@@ -6,41 +6,34 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="informacion">
-            <div>
-                <h1> Informar Avistamiento  </h1>
-            </div>
-            <form class="formulario" id="avist-form">
-            <div id="tipo-input" class="grupo-input">
-                <label for="tipo"> Tipo </label>
-                <input id="tipo" name="tipo" type="tipo" required>
-            </div>
-            <div id="nombre-input" class="grupo-input">
-                <label for="nombre"> Nombre </label>
-                <input id="nombre" name="nombre" type="nombre" required> 
-            </div>
-            <div id="lugar-input" class="grupo-input">
-                <label for="lugar"> Lugar </label>
-                <input id="lugar" name="lugar" type="lugar" required>
-            </div>
-            <div id="fecha-input" class="grupo-input">
-                <label for="fecha"> Fecha </label>
-                <input id="fecha" name="fecha" type="fecha" required>
-            </div>
-            <div id="hora-input" class="grupo-input">
-                <label for="hora"> Hora </label>
-                <input id="hora" name="hora" type="hora" required>        
-            </form>
+        <div id="title">
+            <h1> Informar Avistamiento  </h1>
         </div>
-        <div class="prueba-visual">
-            <div id="foto_video-input" class="imagen-input">
-                <label for="foto_video"> Foto o Video </label>
-                <input id="foto_video" name="foto_video" type="foto_video" required>
-            </div>
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
         </div>
-        <div class="boton">
-            <button id="envio" type="button"> Agregar Avistamiento </button>
-        </div>
+        <form name="formulario" method="post" enctype="multipart/form-data">            
+            <label for="tipo"> Tipo </label>
+            <input id="tipo" name="tipo" type="tipo" required><br>
+        
+            <label for="nombre"> Nombre </label>
+            <input id="nombre" name="nombre" type="nombre" required><br>
+            
+            <label for="lugar"> Lugar </label>
+            <input id="lugar" name="lugar" type="lugar" required><br>
+            
+            <label for="fecha"> Fecha </label>
+            <input id="fecha" name="fecha" type="fecha" required><br>
+            
+            <label for="hora"> Hora </label>
+            <input id="hora" name="hora" type="hora" required><br>        
+        
+            <label for="archivos"> Foto o Video </label>
+            <input id="archivos" name="archivo" type="archivo" multiple accept="image/*,video/*" required><br>
+        
+            <button id="submit-btn" type="button"> Agregar Avistamiento </button>
+        </form>
     </div>
     <script lang="javascript" src="../js/avistamiento.js"></script>
 </body>

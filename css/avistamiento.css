@@ -1,0 +1,38 @@
+:root {
+    --black-color: #000022;
+    --background-color: #E8E6F0;
+    --pink-color: #FC2865;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+.main-container {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.informacion {
+    width: 30%;
+    max-height: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background: white;
+    border: .2em solid var(--black-color);
+    border-radius: .25em;
+    box-shadow: .2em .2em 0px 0px black;
+    margin: 0em 1em 2em 1em;
+    padding: 0.5em 1em 1em 1em;
+}
+
+.informacion > * {
+    width: 100%;
+}
+
+#formulario

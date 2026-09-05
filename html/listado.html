@@ -8,7 +8,7 @@
     <div class="title">
         <h1> Listado de los Ultimos Avistamientos </h1>
     </div>
-    <div class="container-filtros">
+    <section class="container-filtros">
         <label for="filtro-campo"> Ordenar por: </label>
         <select id="filtro-campo">
             <option value="tipo"> Tipo </option>
@@ -17,13 +17,23 @@
             <option value="fecha"> Fecha </option>
             <option value="hora"> Hora </option>
         </select>
+
+        <label for="filtro-tipo"> Filtrar por Tipo: </label>
+        <select id="filtro-tipo">
+            <option value="todos"> Todos los tipos </option>
+            <option value="Ave marina"> Ave marina </option>
+            <option value="Ave rapaz"> Ave rapaz </option>
+            <option value="Ave acuática"> Ave acuática </option>
+            <option value="Paseriforme"> Paseriforme </option>
+        </select>
+        
         <select id="filtro-orden">
             <option value="asc"> Ascendente (A - Z / Más Antiguo) </option>
             <option value="desc"> Descendente (Z - A / Más Reciente) </option>
         </select>
-    </div>
-    <div class="container-table">
-        <div id="cabecera-table">
+    </section>
+    <main class="container-table">
+        <header id="cabecera-table">
             <div class="colums-title">
                 <span> Tipo </span>
                 <span> Nombre </span>
@@ -31,9 +41,14 @@
                 <span> Fecha </span>
                 <span> Hora </span>
              </div>
-        </div>
+        </header>
         <div id="list-avistamientos"></div>
-    </div>
+        <div class="paginacion">
+            <button id="btn-anterior" class="btn-pag"> Anterior </button>
+            <span id="indicador-pagina"> Página 1 </span>
+            <button id="btn-siguiente" class="btn-pag"> Siguiente </button>
+        </div>
+    </main>
     <div class="button">
         <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
     </div>

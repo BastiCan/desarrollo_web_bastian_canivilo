@@ -1,66 +1,100 @@
-:root {
-    --color-borde: #dbdbdb;
+body {
+    font-family: sans-serif;
+    background-color: #2a5a2a; 
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
 }
 
 .container {
-    border: 1px solid var(--color-borde);
-    height: 50%;
-    max-width: 350px;
-    margin: 2% auto;
-    padding: 2rem;
-    padding-top: .5rem;
-    background-color: #ffffff;
-}
-
-.botoner {
-    display: flex;
-    justify-content: center;
-}
-
-label {
-    padding-bottom: 1rem;
-    cursor: pointer;
-}
-
-.formulario {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.grupo-input {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    padding-bottom: 1rem;
-    cursor: pointer;
-}
-
-#envio {
-    background-color: #4bb4f8;
-    border:none;
+    background-color: #1c4e17; 
+    padding: 30px;
+    border: 1px solid #57e491; 
     border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 100%;
+}
+
+.texto h1 {
+    color: #57e491; 
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
     color: white;
-    font-size: 20px;
-    padding: 2% 5%;
+}
+
+input, select {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #10441b; 
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #2a5a2a; 
+    color: white;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #57e491; 
+    box-shadow: 0 0 5px rgba(87, 228, 145, 0.5);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #10441b; 
+    color: white;
+    border: 1px solid #57e491;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
 }
 
-#envio:hover {
-    background-color: #1177bb;
+button:hover {
+    background-color: #57e491;
+    color: #10441b;
+    box-shadow: 0 0 10px rgba(87, 228, 145, 0.4);
 }
 
-label > input {
-    width: 100%;
-    margin-top: 1rem;
+#val-box {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 6px solid;
 }
 
-input {
-    border: 1px solid var(--color-borde);
-    background-color: #fafafa;
-    height: 20px;
-    padding: 9px;
+#val-box h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #1c4e17; 
+}
+
+#val-list {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+    color: #1c4e17;
+}
+
+#val-box button {
+    width: 45%; 
+    margin-top: 15px;
+    margin-right: 2%; 
 }

@@ -19,9 +19,17 @@ const validarLugar = (lugar) => {
 
 const validarFecha = (fecha) => {
     if (!fecha) return false;
-    let largoValido = fecha.trim().length >= 4;
-    let formatoValido = fecha.trim().includes("/");
-    return largoValido && formatoValido;
+    //Para validar el formato: DD/MM/AAAA
+    const regexFecha = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    if (!regexFecha.test(fecha.trim())) return false;
+    const [dia, mes, anio] = fecha.trim().split("/");
+    const fechaIngresada = new Date(anio, mes - 1, dia);
+    const hoy = new Date();
+    hoy.setHours(23, 59, 59, 999);
+    const limitePasado = new Date();
+    limitePasado.setFullYear(hoy.getFullYear() - 1);
+    limitePasado.setHours(0, 0, 0, 0);
+    return fechaIngresada <= hoy && fechaIngresada >= limitePasado;
 };
 
 const validarHora = (hora) => {

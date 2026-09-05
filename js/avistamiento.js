@@ -116,14 +116,14 @@ const validarForm = () => {
         validacionBox.style.borderLeftColor = "#4CAF50";
 
         //Agregar botones para enviar el avistamiento o volver
-        let submitButton = document.createElement("boton");
+        let submitButton = document.createElement("button");
         submitButton.innerText = "Enviar";
         submitButton.style.marginRight = "10px";
         submitButton.addEventListener("click", () =>{
             window.location.href = "../html/inicio.html";
         });
 
-        let backButton = document.createElement("boton");
+        let backButton = document.createElement("button");
         backButton.innerText = "Volver";
         backButton.addEventListener("click", () => {
             //Mostrar el forms de nuevo

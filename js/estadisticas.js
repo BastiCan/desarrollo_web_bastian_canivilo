@@ -28,17 +28,22 @@ const lienzoLugares = document.getElementById("graficoLugares");
 new Chart(lienzoLugares, {
     type: "bar",
     data: {
-        labels: ["Torres del Paine", "Cajón del Maipo", "Conguillío", "Salar de Atacama"],
+        labels: ["Torres del Paine", "Cajón del Maipo", "Conguillío",
+                 "Salar de Atacama", "Parque Metropolitano", "Valle de Azapa",
+                "Altos de Lircay"],
         datasets: [{
             label: "Cantidad de Aves Vistas",
-            data: [35, 28, 15, 12],
+            data: [35, 28, 15, 12, 10, 8, 5],
             backgroundColor: "#57e491",
-            borderRadius: 4
+            borderRadius: 4,
+            barPercentage: 0.9,
+            categoryPercentage: 1.0
         }]
     },
     options: {
         indexAxis: "y",
         color: "#ffffff",
+        aspectRatio: 1.1,
         scales: {
             x: {ticks: {color: "#ffffff" }},
             y: {ticks: {color: "#ffffff" }}

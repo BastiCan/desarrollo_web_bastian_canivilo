@@ -26,7 +26,7 @@ new Chart(lienzoTipos, {
 const lienzoLugares = document.getElementById("graficoLugares");
 
 new Chart(lienzoLugares, {
-    type: "bar",
+    type: "bar", //Gráfico de barra
     data: {
         labels: ["Torres del Paine", "Cajón del Maipo", "Conguillío",
                  "Salar de Atacama", "Parque Metropolitano", "Valle de Azapa",
@@ -48,6 +48,31 @@ new Chart(lienzoLugares, {
             x: {ticks: {color: "#ffffff" }},
             y: {ticks: {color: "#ffffff" }}
         }
+    }
+});
+
+//Tercer Gráfico
+const lienzoVoluntarios = document.getElementById("graficoVoluntarios");
+
+new Chart(lienzoVoluntarios, {
+    type: "pie", //Gráfico de torta
+    data: {
+        labels: ["Metropolitana", "Valparaíso", "Magallanes", "Araucanía", "Antofagasta"],
+        datasets: [{
+            data: [120, 85, 40, 60, 25], 
+            backgroundColor: [
+                "#57e491", 
+                "#10441b", 
+                "#2a5a2a", 
+                "#8cc414", 
+                "#1c4e17"
+            ],
+            borderColor: "#57e491",
+            borderWidth: 1
+        }]
+    },
+    options: {
+        color: "#ffffff"
     }
 });
 

@@ -50,3 +50,8 @@ new Chart(lienzoLugares, {
         }
     }
 });
+
+const pressButton = document.getElementById("submit-btn");
+pressButton.addEventListener("click", function() {
+    window.location.href = "../html/inicio.html";
+});

@@ -20,8 +20,7 @@ const validarLugar = (lugar) => {
 const validarFecha = (fecha) => {
     if (!fecha) return false;
     let largoValido = fecha.trim().length >= 4;
-    let formatoValido = fecha.trim().includes("/"); //Puede ser mejor
-    //lo que quiero que sea de ejemplo es dia/mes/año
+    let formatoValido = fecha.trim().includes("/");
     return largoValido && formatoValido;
 };
 
@@ -29,7 +28,6 @@ const validarHora = (hora) => {
     if (!hora) return false;
     let largoValido = hora.trim().length >= 4;
     let formatoValido = hora.trim().includes(":");
-    //lo mismo de antes pero como 10:10 por ejemplo
     return largoValido && formatoValido;
 };
 

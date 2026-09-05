@@ -9,7 +9,11 @@
         <div class="texto">
             <h1> Registro Voluntario  <h1>     
         </div>
-        <form class="formulario" id="login-form">
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
+        </div>
+        <form name="formulario" method="post" enctype="multipart/form-data">
             <label for="nombre"> Nombre </label>
             <input id="nombre" name="nombre" type="nombre" required><br>
 
@@ -35,7 +39,7 @@
             <label for="calle_numero"> Calle y Número </label>
             <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
 
-            <button id="envio" type="button"> Registrarse </button>
+            <button id="submit-btn" type="button"> Registrarse </button>
         </form>
     </div>
     <script lang="javascript" src="../js/registro.js"></script>

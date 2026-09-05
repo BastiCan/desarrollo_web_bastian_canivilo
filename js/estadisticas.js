@@ -76,6 +76,33 @@ new Chart(lienzoVoluntarios, {
     }
 });
 
+//Cuarto Gráfico
+const lienzoMeses = document.getElementById("graficoMeses");
+
+new Chart(lienzoMeses, {
+    type: "line", //Gráfico de líneas
+    data: {
+        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
+        datasets: [{
+            label: "Nuevos Avistamientos",
+            data: [15, 22, 18, 30, 25, 45, 50], 
+            borderColor: "#57e491", 
+            backgroundColor: "rgba(87, 228, 145, 0.2)", 
+            fill: true,
+            tension: 0.4, 
+            pointBackgroundColor: "#ffffff"
+        }]
+    },
+    options: {
+        color: "#ffffff",
+        aspectRatio: 1.1, 
+        scales: {
+            x: { ticks: { color: "#ffffff" } },
+            y: { ticks: { color: "#ffffff" } }
+        }
+    }
+});
+
 const pressButton = document.getElementById("submit-btn");
 pressButton.addEventListener("click", function() {
     window.location.href = "../html/inicio.html";

@@ -57,6 +57,11 @@ const ordenarLista = () => {
 document.getElementById("filtro-campo").addEventListener("change", ordenarLista);
 document.getElementById("filtro-orden").addEventListener("change", ordenarLista);
 
+const pressButton = document.getElementById("submit-btn");
+pressButton.addEventListener("click", function() {
+    window.location.href = "../html/inicio.html";
+});
+
 window.onload = () => {
     ordenarLista();
 };

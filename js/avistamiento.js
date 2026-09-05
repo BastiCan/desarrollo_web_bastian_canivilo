@@ -74,10 +74,10 @@ const validarForm = () => {
         setInvalidInput("Lugar");
     }
     if (!validarFecha(fecha)) {
-        setInvalidInput("Fecha");
+        setInvalidInput("Fecha (dia/mes/año)");
     }
     if (!validarHora(hora)) {
-        setInvalidInput("Hora");
+        setInvalidInput("Hora (23:59)");
     }
     if (!validarArchivo(archivos)) {
         setInvalidInput("Fotos");

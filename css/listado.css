@@ -4,6 +4,15 @@ body {
     color: white;
 }
 
+.title {
+    max-width: 900px;
+    margin: 20px auto 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
 .container-table {
     max-width: 950px;
     margin: 20px auto;
@@ -41,9 +50,9 @@ body {
 
 .container-filtros select {
     padding: 8px;
-    background-color: #2a475e;
+    background-color: #1c4e17;
     color: white;
-    border: 1px solid #66c0f4;
+    border: 1px solid #57e491;
     border-radius: 4px;
     cursor: pointer;
 }

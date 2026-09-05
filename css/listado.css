@@ -1,3 +1,33 @@
-:root {
-    --color-borde: #dbdbdb;
+body {
+    font-family: sans-serif;
+    background-color: #1b2838;
+    color: white;
+}
+
+.container-table {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.colums-title {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2a475e;
+    margin-top: 20px;
+}
+
+.fila-registro {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 15px 0;
+    border-bottom: 1px solid #2a475e;
+    align-items: center;
+    transition: backgroun 0.2s;
+
+    .fila-registro:hover {
+        background-color: #2a475e;
+    }
 }

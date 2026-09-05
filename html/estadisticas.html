@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"> 
 <head>
+    <meta charset="UTF-8">
     <title> Estadísticas </title>    
     <link rel="stylesheet" type="text/css" href="../css/estadisticas.css">
     <!-- IMPORTO CHART.JS YA QUE EN INTERNET ME GUSTA COMO QUEDAN LOS GRAFICOS
@@ -8,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <h1 style="text-align: center; color: white;"> Panel de Estadísticas </h1>
         <div class="dashboard-container">
             <div class="grafico-card">
@@ -28,10 +29,10 @@
                 <canvas id="graficoMeses"></canvas>
             </div>
         </div>
-    </div>
+    </main>
     <div class="button">
         <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
     </div>
-    <script lang="javascript" src="../js/estadisticas.js"></script>
+    <script src="../js/estadisticas.js"></script>
 </body>
 </html>

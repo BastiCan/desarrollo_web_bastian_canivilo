@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es"> 
 <head>
+    <meta charset="UTF-8">
     <title> Registros </title>
     <link rel="stylesheet" type="text/css" href="../css/registro.css">    
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <div class="texto">
-            <h1> Registro Voluntario  <h1>     
+            <h1> Registro Voluntario </h1>     
         </div>
         <div id="val-box" hidden>
             <h2 id="val-msg"></h2>
@@ -15,16 +16,16 @@
         </div>
         <form name="formulario" method="post" enctype="multipart/form-data">
             <label for="nombre"> Nombre </label>
-            <input id="nombre" name="nombre" type="nombre" required><br>
+            <input id="nombre" name="nombre" type="text" required><br>
 
             <label for="rut"> Rut </label>
-            <input id="rut" name="rut" type="rut" required><br>
+            <input id="rut" name="rut" type="text" required><br>
 
             <label for="email"> Email </label>
             <input id="email" name="email" type="email" required><br>
 
             <label for="telefono"> Telefono </label>
-            <input id="telefono" name="telefono" type="telefono" required><br>
+            <input id="telefono" name="telefono" type="tel" required><br>
 
             <label for="select-region"> Región </label>
             <select id="select-region" name="region" required>
@@ -41,8 +42,8 @@
 
             <button id="submit-btn" type="button"> Registrarse </button>
         </form>
-    </div>
-    <script lang="javascript" src="../js/registro.js"></script>
-    <script lang="javascript" src="../js/select.js"></script>
+    </main>
+    <script src="../js/registro.js"></script>
+    <script src="../js/select.js"></script>
 </body>
 </html>

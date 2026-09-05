@@ -10,55 +10,32 @@
             <h1> Registro Voluntario  <h1>     
         </div>
         <form class="formulario" id="login-form">
-            <div id="nombre-input" class="grupo-input">
-                <label for="nombre"> Nombre </label>
-                <input id="nombre" name="nombre" type="nombre" required>
-            </div>
-            <div id="rut-input" class="grupo-input">
-                <label for="rut"> Rut </label>
-                <input id="rut" name="rut" type="rut" required>
-            </div>
-            <div id="mail-input" class="grupo-input">
-                <label for="email"> Email </label>
-                <input id="email" name="email" type="email" required>
-            </div>
-            <div id="telefono-input" class="grupo-input">
-                <label for="telefono"> Telefono </label>
-                <input id="telefono" name="telefono" type="telefono" required>
-            </div>
-            <div id="region-select" class="grupo-input">
-                <label for="region"> Región </label>
-                <select id="region" name="region" type="region" required>
-                    <option value=""> Seleccione una región: </option>
-                    <option value="arica"> Región de Arica y Parinacota </option>
-                    <option value="tarapaca"> Región de Tarapacá </option>
-                    <option value="antofagasta"> Región de Antofagasta </option>
-                    <option value="atacama"> Región de Atacama </option>
-                    <option value="coquimbo"> Región de Coquimbo </option>
-                    <option value="valparaiso"> Región de Valparaíso </option>
-                    <option value="metropolitana"> Región Metropolitana </option>
-                    <option value="ohiggins"> Región de O'Higgins </option>
-                    <option value="maule"> Región del Maule </option>
-                    <option value="nuble"> Región de Ñuble </option>
-                    <option value="biobio"> Región del Biobio </option>
-                    <option value="araucania"> Región de la Araucanía </option>
-                    <option value="los-rios"> Región de los Rios </option>
-                    <option value="los-lagos"> Región de los Lagos </option>
-                    <option value="aysen"> Región de Aysén </option>
-                    <option value="magallanes"> Región de Magallanes </option>
-                </select>
-            </div>
-            <div id="comuna-input" class="grupo-input">
-                <label for="comuna"> Comuna </label>
-                <input id="comuna" name="comuna" type="comuna" required>
-            </div>
-            <div id="calle_numero-input" class="grupo-input">
-                <label for="calle_numero"> Calle y Número </label>
-                <input id="calle_numero" name="calle_numero" type="calle_numero" required>
-            </div>
-            <div class="botones"> 
-                <button id="envio" type="button"> Registrarse </button>
-            </div>
+            <label for="nombre"> Nombre </label>
+            <input id="nombre" name="nombre" type="nombre" required><br>
+
+            <label for="rut"> Rut </label>
+            <input id="rut" name="rut" type="rut" required><br>
+
+            <label for="email"> Email </label>
+            <input id="email" name="email" type="email" required><br>
+
+            <label for="telefono"> Telefono </label>
+            <input id="telefono" name="telefono" type="telefono" required><br>
+
+            <label for="select-region"> Región </label>
+            <select id="-select-region" name="region" required>
+                <option value=""> Seleccione una región: </option>
+            </select><br>
+
+            <label for="select-comuna"> Comuna </label>
+            <select id="select-comuna" name="select-comuna" required>
+                <option value=""> Seleccione una comuna: </option>
+            </select><br>
+
+            <label for="calle_numero"> Calle y Número </label>
+            <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
+
+            <button id="envio" type="button"> Registrarse </button>
         </form>
     </div>
     <script lang="javascript" src="../js/registro.js"></script>

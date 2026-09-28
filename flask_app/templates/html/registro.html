@@ -14,6 +14,14 @@
             <h2 id="val-msg"></h2>
             <ul id="val-list"></ul>
         </div>
+
+        {% if error %}
+            <div style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px;
+                        border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                {{ error}}
+            </div>
+        {% endif %}
+
         <form name="formulario" method="post" enctype="multipart/form-data">
             <label for="nombre"> Nombre </label>
             <input id="nombre" name="nombre" type="text" required><br>
@@ -40,7 +48,7 @@
             <label for="calle_numero"> Calle y Número </label>
             <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
 
-            <button id="submit-btn" type="button"> Registrarse </button>
+            <button id="submit-btn" type="submit"> Registrarse </button>
         </form>
     </main>
     <script src="../js/registro.js"></script>

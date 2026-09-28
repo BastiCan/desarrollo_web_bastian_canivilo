@@ -63,7 +63,7 @@ class avistamiento(Base):
 class registro(Base):
     __tablename__ = 'registro'
 
-    id = Column(BigIteger, primary_key=True, nullable=False)
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
     ruta_archivo = Column(String(300), nullable=False)
     nombre_archivo = Column(String(300), nullable=False)
     avistamiento_id = Column(BigIteger, ForeignKey('avistamiento.id'), nullable=False)

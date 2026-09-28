@@ -1,57 +1,60 @@
-<!DOCTYPE html>
-<html lang="es"> 
-<head>
-    <meta charset="UTF-8">
-    <title> Registros </title>
-    <link rel="stylesheet" type="text/css" href="../css/registro.css">    
-</head>
-<body>
-    <main class="container">
-        <div class="texto">
-            <h1> Registro Voluntario </h1>     
+{% extends 'html/inicio.html' %}
+{% block tittle %} Registros {% endblock %}
+{% block css %}
+<link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="{{ url_for('static', filename='css/registro.css')}}"
+/>
+{% endblock %}
+{% block content %}  
+<main class="container">
+    <div class="texto">
+        <h1> Registro Voluntario </h1>     
+    </div>
+    <div id="val-box" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
+    </div>
+
+    {% if error %}
+        <div style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px;
+                    border-radius: 5px; margin-bottom: 15px; text-align: center;">
+            {{ error}}
         </div>
-        <div id="val-box" hidden>
-            <h2 id="val-msg"></h2>
-            <ul id="val-list"></ul>
-        </div>
+    {% endif %}
 
-        {% if error %}
-            <div style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px;
-                        border-radius: 5px; margin-bottom: 15px; text-align: center;">
-                {{ error}}
-            </div>
-        {% endif %}
+    <form name="formulario" method="post" enctype="multipart/form-data">
+        <label for="nombre"> Nombre </label>
+        <input id="nombre" name="nombre" type="text" required><br>
 
-        <form name="formulario" method="post" enctype="multipart/form-data">
-            <label for="nombre"> Nombre </label>
-            <input id="nombre" name="nombre" type="text" required><br>
+        <label for="rut"> Rut </label>
+        <input id="rut" name="rut" type="text" required><br>
 
-            <label for="rut"> Rut </label>
-            <input id="rut" name="rut" type="text" required><br>
+        <label for="email"> Email </label>
+        <input id="email" name="email" type="email" required><br>
 
-            <label for="email"> Email </label>
-            <input id="email" name="email" type="email" required><br>
+        <label for="telefono"> Telefono </label>
+        <input id="telefono" name="telefono" type="tel" required><br>
 
-            <label for="telefono"> Telefono </label>
-            <input id="telefono" name="telefono" type="tel" required><br>
+        <label for="select-region"> Región </label>
+        <select id="select-region" name="region" required>
+            <option value=""> Seleccione una región: </option>
+        </select><br>
 
-            <label for="select-region"> Región </label>
-            <select id="select-region" name="region" required>
-                <option value=""> Seleccione una región: </option>
-            </select><br>
+        <label for="select-comuna"> Comuna </label>
+        <select id="select-comuna" name="select-comuna" required>
+            <option value=""> Seleccione una comuna: </option>
+        </select><br>
 
-            <label for="select-comuna"> Comuna </label>
-            <select id="select-comuna" name="select-comuna" required>
-                <option value=""> Seleccione una comuna: </option>
-            </select><br>
+        <label for="calle_numero"> Calle y Número </label>
+        <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
 
-            <label for="calle_numero"> Calle y Número </label>
-            <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
-
-            <button id="submit-btn" type="submit"> Registrarse </button>
-        </form>
-    </main>
-    <script src="../js/registro.js"></script>
-    <script src="../js/select.js"></script>
-</body>
-</html>
+        <button id="submit-btn" type="submit"> Registrarse </button>
+    </form>
+</main>
+{% endblock %}
+{% block javascript %}
+<!-- <script lang="javascript" src="{{ url_for('static', filename='js/registro.js') }}"></script> -->
+<!-- <script lang="javascript" src="{{ url_for('static', filename='js/select.js') }}"></script> -->
+{% endblock %}

@@ -14,3 +14,58 @@ SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
+# --- Models ---
+
+class region(Base):
+    __tablename__ = 'regiones'
+
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False)
+
+
+class comuna(Base):
+    __tablename__ = 'comunas'
+
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False)
+    region_id = Column(BigIteger, ForeignKey('region.id'), nullable=False)
+
+
+class voluntario(Base):
+    __tablename__ = 'voluntarios'
+
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False)
+    email = Column(String(80), nullable=False)
+    telefono = Column(String(15), nullable=False)
+    fecha_registro = Column(   , nullable=Flase)
+    comuna_Id = Column(BigIteger, ForeignKey('comuna.id'), nullable=False)
+
+
+class ave(Base):
+    __tablename__ = 'aves'
+
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
+    nombre = Column(String(80), nullable=False)
+
+
+class avistamiento(Base):
+    __tablename__ = 'avistamientos'
+
+    id = Column(BigIteger, primary_key=True, autoincrement=True)
+    voluntario_id = Column(BigIteger, ForeignKey('voluntario.id'), nullable=False)
+    ave_id = Column(BigIteger, ForeignKey('ave.id'), nullable=False)
+    fecha_hora = Column('DATETIME', nullable=False)
+    lugar = Column(String(200), nullable=False)
+    descripcion = Column('TEXTO(500)', nullable=True)
+
+
+class registro(Base):
+    __tablename__ = 'registros'
+
+    id = Column(BigIteger, primary_key=True, nullable=False)
+    ruta_archivo = Column(String(300), nullable=False)
+    nombre_archivo = Column(String(300), nullable=False)
+    avistamiento_id = Column(BigIteger, ForeignKey('avistamiento.id'), nullable=False)
+
+    

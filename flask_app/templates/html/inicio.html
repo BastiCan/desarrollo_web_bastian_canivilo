@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="es"> 
-    <head>
-        <meta charset="UTF-8">
-        <title> INICIO DE LA PAGINA WEB </title>    
-        <link rel="stylesheet" type="text/css" href="../css/inicio.css">
-    </head>
-    <body>
-        <main class="container">
-            <div class="texto">
-                <h1> Bienvenido a tu pagina favorita de aves </h1>
-                <h2> ¿Por donde quieres navegar hoy? </h2>
-            </div>
-            <div class="botones">
-                <button id="registro" type="button" > Registro de Voluntario(a) </button>
-                <button id="avistamiento" type="button"> Informar Avistamiento </button>
-                <button id="listado" type="button"> Listado Avistamiento </button>
-                <button id="estadistica" type="button"> Estadísticas </button>
-            </div>
-        </main>
-        <script src="../js/inicio.js"></script>
-    </body>
-</html>
+{% extends 'html/base.html' %}
+{% block tittle %} Inicio {% endblock %}
+{% block css %}
+<link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="{{ url_for('static', filename='css/avistamiento.css')}}"
+    />
+{% endblock %}
+{% block content %}  
+<main class="container">
+    <div class="texto">
+        <h1> Bienvenido a tu pagina favorita de aves </h1>
+        <h2> ¿Por donde quieres navegar hoy? </h2>
+    </div>
+    <div class="botones">
+        <button id="registro" type="submit" > Registro de Voluntario(a) </button>
+        <button id="avistamiento" type="submit"> Informar Avistamiento </button>
+        <button id="listado" type="submit"> Listado Avistamiento </button>
+        <button id="estadistica" type="submit"> Estadísticas </button>
+    </div>
+</main>
+{% endblock %}
+{% block javascript %}
+<!-- <script lang="javascript" src="{{ url_for('static', filename='js/inicio.js') }}"></script> -->
+{% endblock %}

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'html/base.html' %}
 {% block tittle %} listado {% endblock %}
 {% block css %}
@@ -6,57 +5,57 @@
     rel="stylesheet" 
     type="text/css" 
     href="{{ url_for('static', filename='css/listado.css')}}"
-/>
+    />
 {% endblock %}
 {% block content %} 
-    <div class="title">
-        <h1> Listado de los Ultimos Avistamientos </h1>
-    </div>
-    <section class="container-filtros">
-        <label for="filtro-campo"> Ordenar por: </label>
-        <select id="filtro-campo">
-            <option value="tipo"> Tipo </option>
-            <option value="nombre"> Nombre </option>
-            <option value="lugar"> Lugar </option>
-            <option value="fecha"> Fecha </option>
-            <option value="hora"> Hora </option>
-        </select>
+<div class="title">
+    <h1> Listado de los Ultimos Avistamientos </h1>
+</div>
+<section class="container-filtros">
+    <label for="filtro-campo"> Ordenar por: </label>
+    <select id="filtro-campo">
+        <option value="tipo"> Tipo </option>
+        <option value="nombre"> Nombre </option>
+        <option value="lugar"> Lugar </option>
+        <option value="fecha"> Fecha </option>
+        <option value="hora"> Hora </option>
+    </select>
 
-        <label for="filtro-tipo"> Filtrar por Tipo: </label>
-        <select id="filtro-tipo">
-            <option value="todos"> Todos los tipos </option>
-            <option value="Ave marina"> Ave marina </option>
-            <option value="Ave rapaz"> Ave rapaz </option>
-            <option value="Ave acuática"> Ave acuática </option>
-            <option value="Paseriforme"> Paseriforme </option>
-        </select>
-        
-        <select id="filtro-orden">
-            <option value="asc"> Ascendente (A - Z / Más Antiguo) </option>
-            <option value="desc"> Descendente (Z - A / Más Reciente) </option>
-        </select>
-    </section>
-    <main class="container-table">
-        <header id="cabecera-table">
-            <div class="colums-title">
-                <span> Tipo </span>
-                <span> Nombre </span>
-                <span> Lugar </span>
-                <span> Fecha </span>
-                <span> Hora </span>
-             </div>
-        </header>
-        <div id="list-avistamientos"></div>
-        <div class="paginacion">
-            <button id="btn-anterior" class="btn-pag"> Anterior </button>
-            <span id="indicador-pagina"> Página 1 </span>
-            <button id="btn-siguiente" class="btn-pag"> Siguiente </button>
-        </div>
-    </main>
-    <div class="button">
-        <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
+    <label for="filtro-tipo"> Filtrar por Tipo: </label>
+    <select id="filtro-tipo">
+        <option value="todos"> Todos los tipos </option>
+        <option value="Ave marina"> Ave marina </option>
+        <option value="Ave rapaz"> Ave rapaz </option>
+        <option value="Ave acuática"> Ave acuática </option>
+        <option value="Paseriforme"> Paseriforme </option>
+    </select>
+    
+    <select id="filtro-orden">
+        <option value="asc"> Ascendente (A - Z / Más Antiguo) </option>
+        <option value="desc"> Descendente (Z - A / Más Reciente) </option>
+    </select>
+</section>
+<main class="container-table">
+    <header id="cabecera-table">
+        <div class="colums-title">
+            <span> Tipo </span>
+            <span> Nombre </span>
+            <span> Lugar </span>
+            <span> Fecha </span>
+            <span> Hora </span>
+            </div>
+    </header>
+    <div id="list-avistamientos"></div>
+    <div class="paginacion">
+        <button id="btn-anterior" class="btn-pag"> Anterior </button>
+        <span id="indicador-pagina"> Página 1 </span>
+        <button id="btn-siguiente" class="btn-pag"> Siguiente </button>
     </div>
-    {% endblock %}
+</main>
+<div class="button">
+    <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
+</div>
+{% endblock %}
 {% block javascript %}
 <!-- <script lang="javascript" src="{{ url_for('static', filename='js/listado.js') }}"></script> -->
 {% endblock %}

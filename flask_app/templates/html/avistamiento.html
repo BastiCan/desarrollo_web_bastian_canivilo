@@ -1,41 +1,52 @@
-<!DOCTYPE html>
-<html lang="es"> 
-<head>
-    <meta charset="UTF-8">
-    <title> Avistamientos </title>
-    <link rel="stylesheet" type="text/css" href="../css/avistamiento.css"> 
-</head>
-<body>
-    <main class="main-container">
-        <div id="title">
-            <h1> Informar Avistamiento </h1>
-        </div>
-        <div id="val-box" hidden>
-            <h2 id="val-msg"></h2>
-            <ul id="val-list"></ul>
-        </div>
-        <form name="formulario" method="post" enctype="multipart/form-data">            
-            <label for="tipo"> Tipo </label>
-            <input id="tipo" name="tipo" type="text" required><br>
+{% extends 'html/base.html' %}
+{% block tittle %} Avistamientos {% endblock %}
+{% block css %}
+<link 
+rel="stylesheet" 
+type="text/css" 
+href="{{ url_for('static', filename='css/avistamiento.css')}}"
+/>
+{% endblock %}
+{% block content %}  
+<main class="main-container">
+    <div id="title">
+        <h1> Informar Avistamiento </h1>
+    </div>
+    <div id="val-box" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
+    </div>
+
+    {% if error %}
+    <div class="error-message" style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px;
+                border-radius: 5px; margin-bottom: 15px; text-align: center;">
+        {{ error}}
+    </div>
+    {% endif %}
+    
+    <form name="formulario" method="post" enctype="multipart/form-data">            
+        <label for="tipo"> Tipo </label>
+        <input id="tipo" name="tipo" type="text" required><br>
+    
+        <label for="nombre"> Nombre </label>
+        <input id="nombre" name="nombre" type="text" required><br>
         
-            <label for="nombre"> Nombre </label>
-            <input id="nombre" name="nombre" type="text" required><br>
-            
-            <label for="lugar"> Lugar </label>
-            <input id="lugar" name="lugar" type="text" required><br>
-            
-            <label for="fecha"> Fecha </label>
-            <input id="fecha" name="fecha" type="text" required><br>
-            
-            <label for="hora"> Hora </label>
-            <input id="hora" name="hora" type="text" required><br>        
+        <label for="lugar"> Lugar </label>
+        <input id="lugar" name="lugar" type="text" required><br>
         
-            <label for="archivos"> Foto o Video </label>
-            <input id="archivos" name="archivo" type="file" multiple accept="image/*,video/*" required><br>
+        <label for="fecha"> Fecha </label>
+        <input id="fecha" name="fecha" type="text" required><br>
         
-            <button id="submit-btn" type="button"> Agregar Avistamiento </button>
-        </form>
-    </main>
-    <script src="../js/avistamiento.js"></script>
-</body>
-</html>
+        <label for="hora"> Hora </label>
+        <input id="hora" name="hora" type="text" required><br>        
+    
+        <label for="archivos"> Foto o Video </label>
+        <input id="archivos" name="archivo" type="file" multiple accept="image/*,video/*" required><br>
+    
+        <button id="submit-btn" type="submit"> Agregar Avistamiento </button>
+    </form>
+</main>
+{% endblock %}
+{% block javascript %}
+<!-- <script lang="javascript" src="{{ url_for('static', filename='js/avistamiento.js') }}"></script> -->
+{% endblock %}

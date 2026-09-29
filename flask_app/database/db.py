@@ -71,10 +71,35 @@ class registro(Base):
 
 # --- Database Functions ---
 
-    
-##def get_user_by_id(id):
+def get_voluntary_by_id(id):
+    session = SessionLocal()
+    user = session.query(voluntario).filter_by(id=id).first()
+    session.close()
+    return user 
 
-def creat_register(ruta_archivo, nombre_archivo, avistamiento_id):
+def get_voluntary_by_email(email):
+    session = SessionLocal()
+    user = session.query(voluntario).filter_by(email=email).first()
+    session.close()
+    return user
+
+def get_voluntary_by_name(nombre):
+    session = SessionLocal()
+    user = session.query(voluntario).filter_by(nombre=nombre).first()
+    session.close()
+    return user
+
+#def get_voluntary_by_register_date(fecha_registro)
+
+def create_voluntary(nombre, email, telefono, fecha_registro, comuna_id):   
+    session = SessionLocal()
+    new_voluntary = voluntario(nombre=nombre, email=email, telefono=telefono, fecha_registro= fecha_registro, comuna_id = comuna_id)
+    session.add(new_voluntary)
+    session.commit()
+    session.close()
+
+
+def create_register(ruta_archivo, nombre_archivo, avistamiento_id):
     session = SessionLocal()
     new_register = registro(ruta_archivo=ruta_archivo, nombre_archivo=nombre_archivo, avistamiento_id=avistamiento_id)
     session.add(new_register)
@@ -86,14 +111,5 @@ def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
     session = SessionLocal()
     new_avistamient = avistamiento(voluntario_id=voluntario_id, ave_id=ave_id, fecha_hora=fecha_hora, lugar=lugar, descripcion=descripcion)
     session.add(new_avistamient)
-    session.commit()
-    session.close()
-
-
-
-def create_voluntarie(nombre, email, telefono, fecha_registro, comuna_id):   
-    session = SessionLocal()
-    new_voluntarie = voluntario(nombre=nombre, email=email, telefono=telefono, fecha_registro= fecha_registro, comuna_id = comuna_id)
-    session.add(new_voluntarie)
     session.commit()
     session.close()

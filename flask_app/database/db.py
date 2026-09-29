@@ -39,7 +39,7 @@ class voluntario(Base):
     email = Column(String(80), nullable=False)
     telefono = Column(String(15), nullable=False)
     fecha_registro = Column(DateTime, nullable=False)
-    comuna_Id = Column(BigIteger, ForeignKey('comuna.id'), nullable=False)
+    comuna_id = Column(BigIteger, ForeignKey('comuna.id'), nullable=False)
 
 
 class ave(Base):
@@ -71,3 +71,29 @@ class registro(Base):
 
 # --- Database Functions ---
 
+    
+##def get_user_by_id(id):
+
+def creat_register(ruta_archivo, nombre_archivo, avistamiento_id):
+    session = SessionLocal()
+    new_register = registro(ruta_archivo=ruta_archivo, nombre_archivo=nombre_archivo, avistamiento_id=avistamiento_id)
+    session.add(new_register)
+    session.commit()
+    session.close()
+    
+
+def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
+    session = SessionLocal()
+    new_avistamient = avistamiento(voluntario_id=voluntario_id, ave_id=ave_id, fecha_hora=fecha_hora, lugar=lugar, descripcion=descripcion)
+    session.add(new_avistamient)
+    session.commit()
+    session.close()
+
+
+
+def create_voluntarie(nombre, email, telefono, fecha_registro, comuna_id):   
+    session = SessionLocal()
+    new_voluntarie = voluntario(nombre=nombre, email=email, telefono=telefono, fecha_registro= fecha_registro, comuna_id = comuna_id)
+    session.add(new_voluntarie)
+    session.commit()
+    session.close()

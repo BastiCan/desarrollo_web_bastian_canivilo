@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="es"> 
-<head>
-    <meta charset="UTF-8">
-    <title> Listado </title>    
-    <link rel="stylesheet" type="text/css" href="../css/listado.css">
-</head>
-<body>
+{% extends 'html/base.html' %}
+{% block tittle %} listado {% endblock %}
+{% block css %}
+<link 
+    rel="stylesheet" 
+    type="text/css" 
+    href="{{ url_for('static', filename='css/listado.css')}}"
+/>
+{% endblock %}
+{% block content %} 
     <div class="title">
         <h1> Listado de los Ultimos Avistamientos </h1>
     </div>
@@ -53,6 +56,7 @@
     <div class="button">
         <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
     </div>
-    <script src="../js/listado.js"></script>
-</body>
-</html>
+    {% endblock %}
+{% block javascript %}
+<!-- <script lang="javascript" src="{{ url_for('static', filename='js/listado.js') }}"></script> -->
+{% endblock %}

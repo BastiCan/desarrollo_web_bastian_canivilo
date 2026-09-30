@@ -1,5 +1,5 @@
-{% extends 'html/base.html' %}
-{% block tittle %} Avistamientos {% endblock %}
+{% extends 'base.html' %}
+{% block title %} Avistamientos {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -43,10 +43,10 @@
         <label for="archivos"> Foto o Video </label>
         <input id="archivos" name="archivo" type="file" multiple accept="image/*,video/*" required><br>
     
-        <button id="submit-btn" type="submit"> Agregar Avistamiento </button>
+        <button id="submit-btn" type="button"> Agregar Avistamiento </button>
     </form>
 </main>
 {% endblock %}
 {% block javascript %}
-<!-- <script lang="javascript" src="{{ url_for('static', filename='js/avistamiento.js') }}"></script> -->
+    <script lang="javascript" src="{{ url_for('static', filename='js/avistamiento.js') }}"></script>
 {% endblock %}

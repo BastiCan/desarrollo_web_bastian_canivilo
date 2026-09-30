@@ -1,5 +1,5 @@
-{% extends 'html/base.html' %}
-{% block tittle %} Inicio {% endblock %}
+{% extends 'base.html' %}
+{% block title %} Inicio {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -22,5 +22,5 @@
 </main>
 {% endblock %}
 {% block javascript %}
-<!-- <script lang="javascript" src="{{ url_for('static', filename='js/inicio.js') }}"></script> -->
+    <script lang="javascript" src="{{ url_for('static', filename='js/inicio.js') }}"></script>
 {% endblock %}

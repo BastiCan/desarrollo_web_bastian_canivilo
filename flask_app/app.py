@@ -16,9 +16,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # --- Auth Routs ---
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
-    if request.method = "POST"
+    if request.method == "POST":
         nombre = request.form.get("nombre")
-        emaill = request.form.get("email")
+        email = request.form.get("email")
         telefono = request.form.get("telefono")
         comuna_id = request.form.get("select-comuna")
 

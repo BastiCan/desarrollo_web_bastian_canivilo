@@ -1,5 +1,5 @@
-{% extends 'html/base.html' %}
-{% block tittle %} Registros {% endblock %}
+{% extends 'base.html' %}
+{% block title %} Registros {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -55,6 +55,6 @@
 </main>
 {% endblock %}
 {% block javascript %}
-<!-- <script lang="javascript" src="{{ url_for('static', filename='js/registro.js') }}"></script> -->
-<!-- <script lang="javascript" src="{{ url_for('static', filename='js/select.js') }}"></script> -->
+    <script lang="javascript" src="{{ url_for('static', filename='js/registro.js') }}"></script> 
+    <script lang="javascript" src="{{ url_for('static', filename='js/select.js') }}"></script> 
 {% endblock %}

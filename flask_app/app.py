@@ -22,7 +22,15 @@ def registro():
         telefono = request.form.get("telefono")
         comuna_id = request.form.get("select-comuna")
 
+@app.route("/avistamiento", methods=["GET", "POST"])
+def avistamiento():
+    pass 
 
+@app.route("/listado")
+def listado():
+
+
+    return render_template("listado.html", avistamientos=datos_bd)
     
 
 

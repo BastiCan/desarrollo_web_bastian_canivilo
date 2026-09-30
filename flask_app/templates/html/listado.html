@@ -57,5 +57,8 @@
 </div>
 {% endblock %}
 {% block javascript %}
-    <script lang="javascript" src="{{ url_for('static', filename='js/listado.js') }}"></script>
+<script>
+    const bdAvistamientos = {{ avistamientos | tojson}};
+</script>
+<script src="{{ url_for('static', filename='js/listado.js') }}"></script>
 {% endblock %}

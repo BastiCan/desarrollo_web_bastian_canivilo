@@ -1,19 +1,19 @@
 const registro = document.getElementById("registro");
 registro.addEventListener("click", function() {
-    window.location.href = "../html/registro.html";
+    window.location.href = "/registro";
 });
 
 const avistamiento = document.getElementById("avistamiento");
 avistamiento.addEventListener("click", function() {
-    window.location.href = "../html/avistamiento.html";
+    window.location.href = "/avistamiento";
 });
 
 const listado = document.getElementById("listado");
 listado.addEventListener("click", function() {
-    window.location.href = "../html/listado.html";
+    window.location.href = "/listado";
 });
 
 const estadistica = document.getElementById("estadistica");
 estadistica.addEventListener("click", function() {
-    window.location.href = "../html/estadisticas.html";
+    window.location.href = "/estadisticas";
 });

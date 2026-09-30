@@ -50,11 +50,11 @@
         <label for="calle_numero"> Calle y Número </label>
         <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
 
-        <button id="submit-btn" type="submit"> Registrarse </button>
+        <button id="submit-btn" type="button"> Registrarse </button>
     </form>
 </main>
 {% endblock %}
 {% block javascript %}
-    <script lang="javascript" src="{{ url_for('static', filename='js/registro.js') }}"></script> 
-    <script lang="javascript" src="{{ url_for('static', filename='js/select.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/registro.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/select.js') }}"></script> 
 {% endblock %}

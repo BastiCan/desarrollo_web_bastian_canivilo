@@ -105,5 +105,5 @@ new Chart(lienzoMeses, {
 
 const pressButton = document.getElementById("submit-btn");
 pressButton.addEventListener("click", function() {
-    window.location.href = "../html/inicio.html";
+    window.location.href = "/inicio";
 });

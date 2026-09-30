@@ -121,27 +121,8 @@ const validarForm = () => {
         validacionBox.style.backgroundColor = "#ddffdd"; 
         validacionBox.style.borderLeftColor = "#4CAF50";
 
-        //Agregar botones para enviar el avistamiento o volver
-        let submitButton = document.createElement("button");
-        submitButton.innerText = "Enviar";
-        submitButton.style.marginRight = "10px";
-        submitButton.addEventListener("click", () =>{
-            window.location.href = "../html/inicio.html";
-        });
-
-        let backButton = document.createElement("button");
-        backButton.innerText = "Volver";
-        backButton.addEventListener("click", () => {
-            //Mostrar el forms de nuevo
-            formulario.style.display = "block";
-            validacionBox.hidden = true;
-        });
-
-        validacionListElem.appendChild(submitButton);
-        validacionListElem.appendChild(backButton);
-
-        //Hacer visible el mensaje de validación
-        validacionBox.hidden = false; 
+        //Enviamos los datos a la base de datos
+        formulario.submit()
     }
 };
 

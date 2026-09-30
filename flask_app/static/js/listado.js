@@ -1,16 +1,3 @@
-const bdAvistamientos = [
-    { tipo: "Ave rapaz", nombre: "Cóndor Andino", lugar: "Cajón del Maipo", fecha: "01/09/2026", hora: "10:30" },
-    { tipo: "Ave marina", nombre: "Pingüino de Humboldt", lugar: "Reserva Nacional Pingüino de Humboldt", fecha: "28/08/2026", hora: "09:15" },
-    { tipo: "Pájaro carpintero", nombre: "Carpintero Negro", lugar: "Parque Nacional Conguillío", fecha: "03/09/2026", hora: "14:20" },
-    { tipo: "Ave acuática", nombre: "Cisne de Cuello Negro", lugar: "Santuario Carlos Anwandter", fecha: "02/09/2026", hora: "11:45" },
-    { tipo: "Ave zancuda", nombre: "Flamenco Chileno", lugar: "Salar de Atacama", fecha: "04/09/2026", hora: "17:30" },
-    { tipo: "Rapaz nocturna", nombre: "Tucúquere", lugar: "Reserva Nacional Altos de Lircay", fecha: "01/09/2026", hora: "21:15" },
-    { tipo: "Paseriforme", nombre: "Loica", lugar: "Parque Metropolitano de Santiago", fecha: "05/09/2026", hora: "08:30" },
-    { tipo: "Ave marina", nombre: "Pelícano", lugar: "Caleta Portales, Valparaíso", fecha: "04/09/2026", hora: "12:10" },
-    { tipo: "Ave corredora", nombre: "Ñandú", lugar: "Torres del Paine", fecha: "25/08/2026", hora: "15:45" },
-    { tipo: "Picaflor", nombre: "Picaflor de Arica", lugar: "Valle de Azapa", fecha: "02/09/2026", hora: "16:00" }
-];
-
 //Variables para controlar las páginas
 let paginaActual = 1;
 const registrosPorPagina = 5;
@@ -107,7 +94,7 @@ document.getElementById("btn-siguiente").addEventListener("click", () => {
 
 const pressButton = document.getElementById("submit-btn");
 pressButton.addEventListener("click", function() {
-    window.location.href = "../html/inicio.html";
+    window.location.href = "/inicio";
 });
 
 window.onload = () => {

@@ -6,7 +6,7 @@ import filetype
 import os
 from database.db import (
     SessionLocal,
-    Comuna, Voluntario, Ave, Avistamiento,
+    Region, Comuna, Voluntario, Ave, Avistamiento,
     get_voluntary_by_email,
     create_voluntary,
     create_avistamient,
@@ -30,25 +30,26 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def inicio():
     return render_template("HTML/inicio.html")
 
+@app.route("/registro", methods=["GET", "POST"])
 @app.route("/voluntario", methods=["GET", "POST"])
 def voluntario():
     if request.method == "POST":
         nombre = request.form.get("nombre")
         email = request.form.get("email")
         telefono = request.form.get("telefono")
-        comuna_id = request.form.get("select-comuna")
+        comuna_id = request.form.get("select-comuna") or request.form.get("comuna_id")
 
-        ##Validar que los campos no esten vacíos
+        # Validar campos requeridos
         if not nombre or not email or not comuna_id:
             flash("Todos estos campos son obligatorios", "error")
             return redirect(url_for("voluntario"))
 
-        ##Validar si el voluntario esta en la base de datos
+        # Validar duplicados por correo
         if get_voluntary_by_email(email):
             flash("El correo electrónico ya se encuentra registrado.", "error")
             return redirect(url_for("voluntario"))
 
-        #Guardamos nuevo voluntario
+        # Guardar nuevo voluntario en la BD
         create_voluntary(
             nombre=nombre,
             email=email,
@@ -60,10 +61,26 @@ def voluntario():
         flash("Registro de voluntario exitoso.", "success")
         return redirect(url_for("listado"))
 
-    ##Si es un GET
+    # Carga de datos para GET: Genera la estructura que consume select.js
     with SessionLocal() as session:
+        regiones = session.query(Region).order_by(Region.id).all()
         comunas = session.query(Comuna).order_by(Comuna.nombre).all()
-        return render_template("html/voluntario.html", comunas=comunas)
+
+        datos_chile = {}
+        for r in regiones:
+            datos_chile[r.id] = {
+                "nombre": r.nombre.strip(),
+                "comunas": []
+            }
+
+        for c in comunas:
+            if c.region_id in datos_chile:
+                datos_chile[c.region_id]["comunas"].append({
+                    "id": c.id,
+                    "nombre": c.nombre.strip()
+                })
+
+        return render_template("html/registro.html", datos_chile=datos_chile)
 
 
 @app.route("/avistamiento", methods=["GET", "POST"])

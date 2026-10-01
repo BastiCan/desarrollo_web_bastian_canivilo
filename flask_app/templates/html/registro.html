@@ -52,6 +52,9 @@
 </main>
 {% endblock %}
 {% block javascript %}
+<script id="datos-chile" type="application/json">
+    {{ datos_chile | tojson | safe }}
+</script>
 <script src="{{ url_for('static', filename='js/registro.js') }}"></script> 
 <script src="{{ url_for('static', filename='js/select.js') }}"></script> 
 {% endblock %}

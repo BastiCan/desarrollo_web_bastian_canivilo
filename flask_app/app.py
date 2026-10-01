@@ -102,8 +102,9 @@ def avistamiento():
 @app.route("/listado")
 def listado():
     with SessionLocal() as session:
-        avistamientos = session.query(Avistamiento).order_by(Avistamiento.fecha_hora.desc()).all()
-        return render_template("html/listado.html", avistamientos=avistamientos)
+        avistamientos_orm = session.query(Avistamiento).order_by(Avistamiento.fecha_hora.desc()).all()
+        avistamientos_list = [a.to_dict() for a in avistamientos_orm]
+        return render_template("html/listado.html", avistamientos=avistamientos_list)
 
 
 @app.route("/estadisticas")

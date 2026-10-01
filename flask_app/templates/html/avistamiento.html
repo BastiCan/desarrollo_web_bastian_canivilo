@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Avistamientos {% endblock %}
+{% block title %} Informar Avistamientos {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -24,26 +24,33 @@
     </div>
     {% endif %}
     
-    <form name="formulario" method="post" enctype="multipart/form-data">            
-        <label for="tipo"> Tipo </label>
-        <input id="tipo" name="tipo" type="text" required><br>
-    
-        <label for="nombre"> Nombre </label>
-        <input id="nombre" name="nombre" type="text" required><br>
+    <form id="form-avistamiento" name="formulario" action="{{ url_for('avistamiento') }}" method="post" enctype="multipart/form-data">            
+        <label for="select-voluntario"> Voluntario </label>
+        <select id="select-voluntario" name="select_voluntario" required>
+            <option value=""> Seleccione un voluntario </option>
+            {% for voluntario in voluntarios %}
+                <option value="{{ voluntario.id }}">{{ voluntario.nombre }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="select-ave"> Ave </label>
+        <select id="select-ave" name="select-ave" required>
+            <option value=""> Seleccione un ave </option>
+            {% for ave in aves %}
+                <option value="{{ ave.id }}">{{ ave.nombre }}</option>
+            {% endfor %}
+        </select><br>
         
         <label for="lugar"> Lugar </label>
         <input id="lugar" name="lugar" type="text" required><br>
         
-        <label for="fecha"> Fecha </label>
-        <input id="fecha" name="fecha" type="text" required><br>
+        <label for="fecha_hora"> Fecha y Hora </label>
+        <input id="fecha_hora" name="fecha_hora" type="datetime-local" required><br>
         
-        <label for="hora"> Hora </label>
-        <input id="hora" name="hora" type="text" required><br>        
-    
-        <label for="archivos"> Foto o Video </label>
-        <input id="archivos" name="archivo" type="file" multiple accept="image/*,video/*" required><br>
-    
-        <button id="submit-btn" type="button"> Agregar Avistamiento </button>
+        <label for="descripcion"> Descripcion </label>
+        <input id="descripcion" name="descripcion" rows="3" required><br>        
+        
+        <button id="submit-btn" type="submit"> Agregar Avistamiento </button>
     </form>
 </main>
 {% endblock %}

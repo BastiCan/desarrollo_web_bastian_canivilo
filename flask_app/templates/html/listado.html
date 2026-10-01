@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} listado {% endblock %}
+{% block title %} Listado {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -14,11 +14,9 @@
 <section class="container-filtros">
     <label for="filtro-campo"> Ordenar por: </label>
     <select id="filtro-campo">
-        <option value="tipo"> Tipo </option>
         <option value="nombre"> Nombre </option>
         <option value="lugar"> Lugar </option>
-        <option value="fecha"> Fecha </option>
-        <option value="hora"> Hora </option>
+        <option value="fecha_hora"> Fecha/Hora </option>
     </select>
 
     <label for="filtro-tipo"> Filtrar por Tipo: </label>
@@ -38,11 +36,10 @@
 <main class="container-table">
     <header id="cabecera-table">
         <div class="colums-title">
-            <span> Tipo </span>
             <span> Nombre </span>
             <span> Lugar </span>
-            <span> Fecha </span>
-            <span> Hora </span>
+            <span> Fecha y Hora </span>
+            <span> Descripción </span>
             </div>
     </header>
     <div id="list-avistamientos"></div>
@@ -57,8 +54,11 @@
 </div>
 {% endblock %}
 {% block javascript %}
+<script id="data-avistamientos" type="application/json">
+    {{ avistamientos | tojson | safe }}
+</script>
 <script>
-    const bdAvistamientos = {{ avistamientos | tojson}};
+    const bdAvistamientos = JSON.parse(document.getElementById('data-avistamientos').textContent);
 </script>
 <script src="{{ url_for('static', filename='js/listado.js') }}"></script>
 {% endblock %}

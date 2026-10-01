@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Registros {% endblock %}
+{% block title %} Registro Voluntario {% endblock %}
 {% block css %}
 <link 
     rel="stylesheet" 
@@ -24,12 +24,9 @@
         </div>
     {% endif %}
 
-    <form name="formulario" method="post" enctype="multipart/form-data">
+    <form id="form-registro" name="formulario" action="{{ url_for('volunario')}}" method="post" enctype="multipart/form-data">
         <label for="nombre"> Nombre </label>
         <input id="nombre" name="nombre" type="text" required><br>
-
-        <label for="rut"> Rut </label>
-        <input id="rut" name="rut" type="text" required><br>
 
         <label for="email"> Email </label>
         <input id="email" name="email" type="email" required><br>
@@ -45,12 +42,12 @@
         <label for="select-comuna"> Comuna </label>
         <select id="select-comuna" name="select-comuna" required>
             <option value=""> Seleccione una comuna: </option>
+            {% for comuna in comunas %}
+                <optio value="{{ comuna.id }}">{{ comuna.nombre }}</optio>
+            {% endfor %}
         </select><br>
-
-        <label for="calle_numero"> Calle y Número </label>
-        <input id="calle_numero" name="calle_numero" type="calle_numero" required><br>
-
-        <button id="submit-btn" type="button"> Registrarse </button>
+        
+        <button id="submit-btn" type="submit"> Registrarse </button>
     </form>
 </main>
 {% endblock %}

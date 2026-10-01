@@ -4,7 +4,7 @@
 <link 
     rel="stylesheet" 
     type="text/css" 
-    href="{{ url_for('static', filename='css/avistamiento.css')}}"
+    href="{{ url_for('static', filename='css/inicio.css')}}"
     />
 {% endblock %}
 {% block content %}  
@@ -14,10 +14,10 @@
         <h2> ¿Por donde quieres navegar hoy? </h2>
     </div>
     <div class="botones">
-        <button id="registro" type="submit" > Registro de Voluntario(a) </button>
-        <button id="avistamiento" type="submit"> Informar Avistamiento </button>
-        <button id="listado" type="submit"> Listado Avistamiento </button>
-        <button id="estadistica" type="submit"> Estadísticas </button>
+        <button id="registro" type="button" > Registro de Voluntario(a) </button>
+        <button id="avistamiento" type="button"> Informar Avistamiento </button>
+        <button id="listado" type="button"> Listado Avistamiento </button>
+        <button id="estadistica" type="button"> Estadísticas </button>
     </div>
 </main>
 {% endblock %}

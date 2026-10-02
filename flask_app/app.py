@@ -94,12 +94,26 @@ def avistamiento():
                 return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Todos los campos son obligatorios.")
 
             if not archivos or len(archivos) == 0 or archivos[0].filename == '':
-                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Debe adjuntar al menos un archivo o foto.")
+                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Debe adjuntar una foto.")
 
             try:
                 fecha_hora = datetime.strptime(fecha_hora_str, "%Y-%m-%dT%H:%M")
+    
+                if fecha_hora > datetime.now():
+                    return render_template(
+                    "html/avistamiento.html", 
+                    voluntarios=voluntarios, 
+                    aves=aves, 
+                    error="La fecha y hora del avistamiento no pueden ser futuras."
+                    )
+                
             except (ValueError, TypeError):
-                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Formato de fecha inválido.")
+                return render_template(
+                "html/avistamiento.html", 
+                voluntarios=voluntarios, 
+                aves=aves, 
+                error="Formato de fecha inválido."
+                )
 
             nuevo_avistamiento = create_avistamient(
                 voluntario_id=int(voluntario_id),

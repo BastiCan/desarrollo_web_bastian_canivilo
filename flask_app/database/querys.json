@@ -1,3 +1,8 @@
 {
-    
+    "get_voluntary_by_id": "SELECT * FROM voluntario WHERE id = :id;",
+    "get_voluntary_by_email": "SELECT * FROM voluntario WHERE email = :email;", 
+    "get_voluntary_by_name": "SELECT * FROM voluntario WHERE nombre  = :nombre   ;",
+    "create_voluntary":"INSERT INTO voluntario (nombre, email, telefono, fecha_registro, comuna_id) VALUES (:nombre, :email, :telefono, :fecha_registro, :comuna_id);", 
+    "create_register": "INSERT INTO registro (ruta_archivo, nombre_archivo, avistamiento_id) VALUES (:ruta_archivo, :nombre_archivo, :avistamiento_id);",
+    "create_avistamient": "INSERT INTO avistamiento (voluntario_id, ave_id, fecha_hora, lugar, descripcion) VALUES (:voluntario_id, :ave_id, :fecha_hora, :lugar, :descripcion);"
 }

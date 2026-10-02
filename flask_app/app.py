@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 from datetime import datetime
+from werkzeug.utils import secure_filename
 import hashlib
 import filetype
 import os
@@ -76,35 +77,56 @@ def voluntario():
 
 @app.route("/avistamiento", methods=["GET", "POST"])
 def avistamiento():
-    if request.method == "POST":
-        voluntario_id = request.form.get("select_voluntario") or request.form.get("voluntario_id")
-        ave_id = request.form.get("select-ave") or request.form.get("ave_id")
-        fecha_hora_str = request.form.get("fecha_hora")
-        lugar = request.form.get("lugar")
-        descripcion = request.form.get("descripcion")
-
-        ##Ver si la fecha esta bien ingresada
-        try:
-            fecha_hora = datetime.strptime(fecha_hora_str, "%Y-%m-%dT%H:%M")
-        except (ValueError, TypeError):
-            fecha_hora = datetime.now()
-
-        ##Guardamos el avistamiento
-        create_avistamient(
-            voluntario_id= int(voluntario_id),
-            ave_id= int(ave_id),
-            fecha_hora= fecha_hora,
-            lugar= lugar,
-            descripcion= descripcion
-        )
-
-        flash("Avistamiento registrado correctamente.", "success")
-        return redirect(url_for("listado"))
-
-    ##Si es un GET
     with SessionLocal() as session:
-        voluntarios = session.query(Avistamiento).order_by(Avistamiento.fecha_hora.desc()).all()
+        voluntarios = session.query(Voluntario).order_by(Voluntario.nombre).all()
         aves = session.query(Ave).order_by(Ave.nombre).all()
+
+        if request.method == "POST":
+            voluntario_id = request.form.get("select_voluntario") or request.form.get("voluntario_id")
+            ave_id = request.form.get("select-ave") or request.form.get("ave_id")
+            fecha_hora_str = request.form.get("fecha_hora")
+            lugar = request.form.get("lugar", "").strip()
+            descripcion = request.form.get("descripcion", "").strip()
+            archivos = request.files.getlist("archivos")
+
+            if not voluntario_id or not ave_id or not lugar or not fecha_hora_str or not descripcion:
+                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Todos los campos son obligatorios.")
+
+            if not archivos or len(archivos) == 0 or archivos[0].filename == '':
+                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Debe adjuntar al menos un archivo o foto.")
+
+            try:
+                fecha_hora = datetime.strptime(fecha_hora_str, "%Y-%m-%dT%H:%M")
+            except (ValueError, TypeError):
+                return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves, error="Formato de fecha inválido.")
+
+            nuevo_avistamiento = create_avistamient(
+                voluntario_id=int(voluntario_id),
+                ave_id=int(ave_id),
+                fecha_hora=fecha_hora,
+                lugar=lugar,
+                descripcion=descripcion
+            )
+
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            for file in archivos:
+                if file and file.filename != '':
+                    nombre_original = secure_filename(file.filename)
+                    nombre_guardado = f"{datetime.now().timestamp()}_{nombre_original}"
+                    ruta_completa = os.path.join(app.config['UPLOAD_FOLDER'], nombre_guardado)
+                    
+                    file.save(ruta_completa)
+
+                    create_register(
+                        ruta_archivo=f"uploads/{nombre_guardado}",
+                        nombre_archivo=nombre_original,
+                        avistamiento_id=nuevo_avistamiento.id
+                    )
+
+            flash("¡Avistamiento e imágenes registrados con éxito!", "success")
+            return redirect(url_for("inicio"))
+
         return render_template("html/avistamiento.html", voluntarios=voluntarios, aves=aves)
 
 @app.route("/listado")

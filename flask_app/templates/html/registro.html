@@ -1,26 +1,24 @@
 {% extends 'html/base.html' %}
 {% block title %} Registro Voluntario {% endblock %}
+
 {% block css %}
-<link 
-    rel="stylesheet" 
-    type="text/css" 
-    href="{{ url_for('static', filename='css/registro.css')}}"
-/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/registro.css')}}"/>
 {% endblock %}
+
 {% block content %}  
 <main class="container">
     <div class="texto">
         <h1> Registro Voluntario </h1>     
     </div>
+
     <div id="val-box" hidden>
         <h2 id="val-msg"></h2>
         <ul id="val-list"></ul>
     </div>
 
     {% if error %}
-        <div class="error-message" style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px;
-                    border-radius: 5px; margin-bottom: 15px; text-align: center;">
-            {{ error}}
+        <div class="error-message" style="color: #ff4c4c; font-weight: bold; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+            {{ error }}
         </div>
     {% endif %}
 
@@ -42,15 +40,13 @@
         <label for="select-comuna"> Comuna </label>
         <select id="select-comuna" name="select-comuna" required>
             <option value=""> Seleccione una comuna: </option>
-            {% for comuna in comunas %}
-                <optio value="{{ comuna.id }}">{{ comuna.nombre }}</optio>
-            {% endfor %}
         </select><br>
         
         <button id="submit-btn" type="submit"> Registrarse </button>
     </form>
 </main>
 {% endblock %}
+
 {% block javascript %}
 <script id="datos-chile" type="application/json">
     {{ datos_chile | tojson | safe }}

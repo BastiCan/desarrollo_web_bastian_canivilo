@@ -27,57 +27,49 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/inicio")
 def inicio():
-    return render_template("HTML/inicio.html")
+    with SessionLocal() as session:
+        ##Vemos los dos ultimos avistamientos
+        ultimos_orm = session.query(Avistamiento).order_by(Avistamiento.fecha_hora.desc()).limit(2).all()
+        ultimos_avistamientos = [a.to_dict() for a in ultimos_orm]
+        
+        return render_template("html/inicio.html", avistamientos=ultimos_avistamientos)
 
 @app.route("/registro", methods=["GET", "POST"])
 @app.route("/voluntario", methods=["GET", "POST"])
 def voluntario():
-    if request.method == "POST":
-        nombre = request.form.get("nombre")
-        email = request.form.get("email")
-        telefono = request.form.get("telefono")
-        comuna_id = request.form.get("select-comuna") or request.form.get("comuna_id")
-
-        # Validar campos requeridos
-        if not nombre or not email or not comuna_id:
-            flash("Todos estos campos son obligatorios", "error")
-            return redirect(url_for("voluntario"))
-
-        # Validar duplicados por correo
-        if get_voluntary_by_email(email):
-            flash("El correo electrónico ya se encuentra registrado.", "error")
-            return redirect(url_for("voluntario"))
-
-        # Guardar nuevo voluntario en la BD
-        create_voluntary(
-            nombre=nombre,
-            email=email,
-            telefono=telefono,
-            fecha_registro=datetime.now(),
-            comuna_id=int(comuna_id)
-        )
-            
-        flash("Registro de voluntario exitoso.", "success")
-        return redirect(url_for("listado"))
-
-    # Carga de datos para GET: Genera la estructura que consume select.js
     with SessionLocal() as session:
         regiones = session.query(Region).order_by(Region.id).all()
         comunas = session.query(Comuna).order_by(Comuna.nombre).all()
 
         datos_chile = {}
         for r in regiones:
-            datos_chile[r.id] = {
-                "nombre": r.nombre.strip(),
-                "comunas": []
-            }
-
+            datos_chile[r.id] = {"nombre": r.nombre.strip(), "comunas": []}
         for c in comunas:
             if c.region_id in datos_chile:
-                datos_chile[c.region_id]["comunas"].append({
-                    "id": c.id,
-                    "nombre": c.nombre.strip()
-                })
+                datos_chile[c.region_id]["comunas"].append({"id": c.id, "nombre": c.nombre.strip()})
+
+        if request.method == "POST":
+            nombre = request.form.get("nombre")
+            email = request.form.get("email")
+            telefono = request.form.get("telefono")
+            comuna_id = request.form.get("select-comuna") or request.form.get("comuna_id")
+
+            if not nombre or not email or not comuna_id or not telefono:
+                return render_template("html/registro.html", datos_chile=datos_chile, error="Todos los campos son obligatorios.")
+
+            if get_voluntary_by_email(email):
+                return render_template("html/registro.html", datos_chile=datos_chile, error="El correo electrónico ya se encuentra registrado.")
+
+            nuevo_voluntario = create_voluntary(
+                nombre=nombre,
+                email=email,
+                telefono=telefono,
+                fecha_registro=datetime.now(),
+                comuna_id=int(comuna_id)
+            )
+
+            flash("Registro de voluntario exitoso. ¿Deseas informar un avistamiento para este voluntario?", "success")
+            return render_template("html/exito_registro.html", voluntario=nuevo_voluntario)
 
         return render_template("html/registro.html", datos_chile=datos_chile)
 
@@ -93,7 +85,7 @@ def avistamiento():
 
         ##Ver si la fecha esta bien ingresada
         try:
-            fecha_hora = datetime.strftime(fecha_hora_str, "%Y-%m-%dT%H:%M")
+            fecha_hora = datetime.strptime(fecha_hora_str, "%Y-%m-%dT%H:%M")
         except (ValueError, TypeError):
             fecha_hora = datetime.now()
 

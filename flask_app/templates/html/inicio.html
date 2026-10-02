@@ -7,18 +7,39 @@
     href="{{ url_for('static', filename='css/inicio.css')}}"
     />
 {% endblock %}
-{% block content %}  
+{% block content %}
 <main class="container">
     <div class="texto">
-        <h1> Bienvenido a tu pagina favorita de aves </h1>
+        <h1> Bienvenido a tu pagina favorita de aves! </h1>
         <h2> ¿Por donde quieres navegar hoy? </h2>
     </div>
-    <div class="botones">
-        <button id="registro" type="button" > Registro de Voluntario(a) </button>
-        <button id="avistamiento" type="button"> Informar Avistamiento </button>
-        <button id="listado" type="button"> Listado Avistamiento </button>
-        <button id="estadistica" type="button"> Estadísticas </button>
-    </div>
+
+    <nav>
+        <button id="registro">Registrar Voluntario</button>
+        <button id="avistamiento">Informar Avistamiento</button>
+        <button id="listado">Listado</button>
+        <button id="estadistica">Estadísticas</button>
+    </nav>
+
+    <hr>
+
+    <section>
+        <h2>Últimos Avistamientos Registrados</h2>
+
+        {% if avistamientos %}
+            <ul>
+            {% for a in avistamientos %}
+                <li>
+                    <p><strong>Lugar:</strong> {{ a.lugar }}</p>
+                    <p><strong>Fecha y Hora:</strong> {{ a.fecha_hora }}</p>
+                    <p><strong>Descripción:</strong> {{ a.descripcion }}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay avistamientos registrados todavía.</p>
+        {% endif %}
+    </section>
 </main>
 {% endblock %}
 {% block javascript %}

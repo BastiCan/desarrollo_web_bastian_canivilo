@@ -1,0 +1,17 @@
+{% extends 'html/base.html' %}
+{% block title %} Registro Exitoso {% endblock %}
+
+{% block content %}
+<main class="container text-center my-5">
+    <h2>¡Voluntario registrado con éxito!</h2>
+    <p class="lead">¿Qué deseas hacer a continuación?</p>
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('avistamiento') }}" class="btn btn-primary" style="padding: 10px 20px; margin-right: 10px;">
+            Informar Avistamiento
+        </a>
+        <a href="{{ url_for('inicio') }}" class="btn btn-secondary" style="padding: 10px 20px;">
+            Ir al Inicio
+        </a>
+    </div>
+</main>
+{% endblock %}

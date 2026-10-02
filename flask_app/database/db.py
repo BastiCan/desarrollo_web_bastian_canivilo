@@ -137,7 +137,7 @@ def create_register(ruta_archivo, nombre_archivo, avistamiento_id):
     session.commit()
     session.close()
     
-
+    
 def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
     with SessionLocal() as session:
         nuevo = Avistamiento(

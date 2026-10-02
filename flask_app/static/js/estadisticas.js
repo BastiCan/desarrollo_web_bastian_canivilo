@@ -1,109 +1,96 @@
-//Primer Gráfico
-const lienzoTipos = document.getElementById("graficoTipos");
-
-new Chart(lienzoTipos, {
-    type: "doughnut", //Forma del Gráfico
-    data: {
-        labels: ["Aves Marinas", "Rapaces", "Acuáticas", "Paseriformes"],
-        datasets: [{
-            data: [45, 25, 20, 10],
-            backgroundColor: [
-                "#57e491",
-                "#10441b",
-                "#2a5a2a",
-                "#8cc414"
-            ],
-            borderColor: "#1c4e17",
-            borderWidth: 2
-        }]
-    },
-    options: {
-        color: "#ffffff",
+document.addEventListener("DOMContentLoaded", () => {
+    const btnInicio = document.getElementById("submit-btn");
+    if (btnInicio) {
+        btnInicio.addEventListener("click", () => {
+            window.location.href = "/inicio";
+        });
     }
-});
-
-//Segundo Gráfico
-const lienzoLugares = document.getElementById("graficoLugares");
-
-new Chart(lienzoLugares, {
-    type: "bar", //Gráfico de barra
-    data: {
-        labels: ["Torres del Paine", "Cajón del Maipo", "Conguillío",
-                 "Salar de Atacama", "Parque Metropolitano", "Valle de Azapa",
-                "Altos de Lircay"],
-        datasets: [{
-            label: "Cantidad de Aves Vistas",
-            data: [35, 28, 15, 12, 10, 8, 5],
-            backgroundColor: "#57e491",
-            borderRadius: 4,
-            barPercentage: 0.9,
-            categoryPercentage: 1.0
-        }]
-    },
-    options: {
-        indexAxis: "y",
-        color: "#ffffff",
-        aspectRatio: 1.1,
-        scales: {
-            x: {ticks: {color: "#ffffff" }},
-            y: {ticks: {color: "#ffffff" }}
-        }
+    
+    // 1. Gráfico: Avistamientos por Tipo
+    const ctxTipos = document.getElementById('graficoTipos');
+    if (ctxTipos) {
+        new Chart(ctxTipos, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ave marina', 'Ave rapaz', 'Ave acuática', 'Paseriforme'],
+                datasets: [{
+                    data: [12, 19, 7, 15],
+                    backgroundColor: ['#57e491', '#10441b', '#2a5a2a', '#85ffa5']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: 'white' } } }
+            }
+        });
     }
-});
 
-//Tercer Gráfico
-const lienzoVoluntarios = document.getElementById("graficoVoluntarios");
-
-new Chart(lienzoVoluntarios, {
-    type: "pie", //Gráfico de torta
-    data: {
-        labels: ["Metropolitana", "Valparaíso", "Magallanes", "Araucanía", "Antofagasta"],
-        datasets: [{
-            data: [120, 85, 40, 60, 25], 
-            backgroundColor: [
-                "#57e491", 
-                "#10441b", 
-                "#2a5a2a", 
-                "#8cc414", 
-                "#1c4e17"
-            ],
-            borderColor: "#57e491",
-            borderWidth: 1
-        }]
-    },
-    options: {
-        color: "#ffffff"
+    // 2. Gráfico: Top Lugares
+    const ctxLugares = document.getElementById('graficoLugares');
+    if (ctxLugares) {
+        new Chart(ctxLugares, {
+            type: 'bar',
+            data: {
+                labels: ['Santiago', 'Valparaíso', 'Concepción', 'La Serena'],
+                datasets: [{
+                    label: 'Avistamientos',
+                    data: [25, 18, 12, 9],
+                    backgroundColor: '#57e491'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { ticks: { color: 'white' } },
+                    y: { ticks: { color: 'white' } }
+                },
+                plugins: { legend: { labels: { color: 'white' } } }
+            }
+        });
     }
-});
 
-//Cuarto Gráfico
-const lienzoMeses = document.getElementById("graficoMeses");
-
-new Chart(lienzoMeses, {
-    type: "line", //Gráfico de líneas
-    data: {
-        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
-        datasets: [{
-            label: "Nuevos Avistamientos",
-            data: [15, 22, 18, 30, 25, 45, 50], 
-            borderColor: "#57e491", 
-            backgroundColor: "rgba(87, 228, 145, 0.2)", 
-            fill: true,
-            tension: 0.4, 
-            pointBackgroundColor: "#ffffff"
-        }]
-    },
-    options: {
-        color: "#ffffff",
-        aspectRatio: 1.1, 
-        scales: {
-            x: { ticks: { color: "#ffffff" } },
-            y: { ticks: { color: "#ffffff" } }
-        }
+    // 3. Gráfico: Voluntarios por Región
+    const ctxVoluntarios = document.getElementById('graficoVoluntarios');
+    if (ctxVoluntarios) {
+        new Chart(ctxVoluntarios, {
+            type: 'pie',
+            data: {
+                labels: ['Metropolitana', 'Valparaíso', 'Biobío', 'Coquimbo'],
+                datasets: [{
+                    data: [40, 20, 15, 10],
+                    backgroundColor: ['#57e491', '#10441b', '#3b7a3b', '#85ffa5']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: 'white' } } }
+            }
+        });
     }
-});
 
-const pressButton = document.getElementById("submit-btn");
-pressButton.addEventListener("click", function() {
-    window.location.href = "/inicio";
+    // 4. Gráfico: Avistamientos por Mes
+    const ctxMeses = document.getElementById('graficoMeses');
+    if (ctxMeses) {
+        new Chart(ctxMeses, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Avistamientos',
+                    data: [5, 12, 18, 14, 22, 30],
+                    borderColor: '#57e491',
+                    backgroundColor: 'rgba(87, 228, 145, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { ticks: { color: 'white' } },
+                    y: { ticks: { color: 'white' } }
+                },
+                plugins: { legend: { labels: { color: 'white' } } }
+            }
+        });
+    }
 });

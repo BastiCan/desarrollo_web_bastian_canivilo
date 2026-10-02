@@ -1,15 +1,19 @@
 {% extends 'html/base.html' %}
 {% block title %} Registro Exitoso {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/exito_registro.css') }}"/>
+{% endblock %}
+
 {% block content %}
-<main class="container text-center my-5">
+<main class="container">
     <h2>¡Voluntario registrado con éxito!</h2>
-    <p class="lead">¿Qué deseas hacer a continuación?</p>
-    <div style="margin-top: 20px;">
-        <a href="{{ url_for('avistamiento') }}" class="btn btn-primary" style="padding: 10px 20px; margin-right: 10px;">
+    <p>¿Qué deseas hacer a continuación?</p>
+    <div class="botones-exito">
+        <a href="{{ url_for('avistamiento') }}" class="btn-exito">
             Informar Avistamiento
         </a>
-        <a href="{{ url_for('inicio') }}" class="btn btn-secondary" style="padding: 10px 20px;">
+        <a href="{{ url_for('inicio') }}" class="btn-exito secundario">
             Ir al Inicio
         </a>
     </div>

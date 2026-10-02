@@ -14,14 +14,15 @@ from database.db import (
 )
 
 
-
-
-UPLOAD_FOLDER = 'static/uploads'
-
 app = Flask(__name__)
 
 app.secret_key = "s3cr3t_k3y"
+
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+
 
 # --- Auth Routs ---
 @app.route("/")
@@ -113,9 +114,9 @@ def avistamiento():
             for file in archivos:
                 if file and file.filename != '':
                     nombre_original = secure_filename(file.filename)
-                    nombre_guardado = f"{datetime.now().timestamp()}_{nombre_original}"
-                    ruta_completa = os.path.join(app.config['UPLOAD_FOLDER'], nombre_guardado)
+                    nombre_guardado = f"{int(datetime.now().timestamp())}_{nombre_original}"
                     
+                    ruta_completa = os.path.join(app.config['UPLOAD_FOLDER'], nombre_guardado)
                     file.save(ruta_completa)
 
                     create_register(
@@ -139,7 +140,7 @@ def listado():
 
 @app.route("/estadisticas")
 def estadisticas():
-    return render_template("HTML/estadísticas.html")
+    return render_template("html/estadisticas.html")
     
 
 if __name__ == "__main__":

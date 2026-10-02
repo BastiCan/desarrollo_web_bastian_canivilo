@@ -14,32 +14,31 @@
         <h2> ¿Por donde quieres navegar hoy? </h2>
     </div>
 
-    <nav>
+    <div class="botones"> 
         <button id="registro">Registrar Voluntario</button>
         <button id="avistamiento">Informar Avistamiento</button>
         <button id="listado">Listado</button>
         <button id="estadistica">Estadísticas</button>
-    </nav>
+    </div>
 
-    <hr>
+    <hr class="divisor">
 
-    <section>
+    <div class="ultimos-section">
         <h2>Últimos Avistamientos Registrados</h2>
-
-        {% if avistamientos %}
-            <ul>
-            {% for a in avistamientos %}
-                <li>
-                    <p><strong>Lugar:</strong> {{ a.lugar }}</p>
-                    <p><strong>Fecha y Hora:</strong> {{ a.fecha_hora }}</p>
-                    <p><strong>Descripción:</strong> {{ a.descripcion }}</p>
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No hay avistamientos registrados todavía.</p>
-        {% endif %}
-    </section>
+        <div class="grid-ultimos">
+            {% if avistamientos %}
+                {% for a in avistamientos %}
+                    <div class="card-avistamiento">
+                        <p><strong>Lugar:</strong> {{ a.lugar }}</p>
+                        <p><strong>Fecha y Hora:</strong> {{ a.fecha_hora }}</p>
+                        <p><strong>Descripción:</strong> {{ a.descripcion }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay avistamientos registrados aún.</p>
+            {% endif %}
+        </div>
+    </div>
 </main>
 {% endblock %}
 {% block javascript %}

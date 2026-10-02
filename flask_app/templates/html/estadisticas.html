@@ -1,38 +1,40 @@
-<!DOCTYPE html>
-<html lang="es"> 
-<head>
-    <meta charset="UTF-8">
-    <title> Estadísticas </title>    
-    <link rel="stylesheet" type="text/css" href="../css/estadisticas.css">
-    <!-- IMPORTO CHART.JS YA QUE EN INTERNET ME GUSTA COMO QUEDAN LOS GRAFICOS
-         Y ADEMÁS SE VE MÁS PROFESIONAL -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <main class="container">
-        <h1 style="text-align: center; color: white;"> Panel de Estadísticas </h1>
-        <div class="dashboard-container">
-            <div class="grafico-card">
-                <h3> Avistamiento por Tipo </h3>
-                <canvas id="graficoTipos"></canvas>
-            </div>
-            <div class="grafico-card">
-                <h3> Top Lugares de Avistamiento </h3>
-                <canvas id="graficoLugares"></canvas>
-            </div>
-            <div class="grafico-card">
-                <h3>Voluntarios por Región</h3>
-                <canvas id="graficoVoluntarios"></canvas>
-            </div>
-            <div class="grafico-card">
-                <h3>Avistamientos por Mes</h3>
-                <canvas id="graficoMeses"></canvas>
-            </div>
+{% extends 'html/base.html' %}
+{% block title %} Estadísticas {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estadisticas.css') }}"/>
+<!-- Importamos Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+    <h1 style="text-align: center; color: white;"> Panel de Estadísticas </h1>
+    <div class="dashboard-container">
+        <div class="grafico-card">
+            <h3> Avistamiento por Tipo </h3>
+            <canvas id="graficoTipos"></canvas>
         </div>
-    </main>
-    <div class="button">
-        <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
+        <div class="grafico-card">
+            <h3> Top Lugares de Avistamiento </h3>
+            <canvas id="graficoLugares"></canvas>
+        </div>
+        <div class="grafico-card">
+            <h3>Voluntarios por Región</h3>
+            <canvas id="graficoVoluntarios"></canvas>
+        </div>
+        <div class="grafico-card">
+            <h3>Avistamientos por Mes</h3>
+            <canvas id="graficoMeses"></canvas>
+        </div>
     </div>
-    <script src="../js/estadisticas.js"></script>
-</body>
-</html>
+</main>
+
+<div class="button-container" style="text-align: center; margin-top: 20px;">
+    <button id="submit-btn" class="button" type="button"> Volver al inicio </button>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
+{% endblock %}

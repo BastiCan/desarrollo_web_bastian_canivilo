@@ -2,77 +2,76 @@ body {
     font-family: sans-serif;
     background-color: #2a5a2a;
     color: white;
+    margin: 0;
+    padding: 20px;
 }
 
 .title {
-    max-width: 900px;
+    max-width: 950px;
     margin: 20px auto 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h1 {
+    color: #57e491;
+    margin: 0;
+}
+
+.container-filtros {
+    max-width: 950px;
+    margin: 20px auto;
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     align-items: center;
+}
+
+.container-filtros label {
+    font-weight: bold;
+}
+
+.container-filtros select {
+    padding: 8px 12px;
+    background-color: #1c4e17;
+    color: white;
+    border: 1px solid #57e491;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .container-table {
     max-width: 950px;
     margin: 20px auto;
+    background-color: #1c4e17;
+    border: 1px solid #57e491;
+    border-radius: 8px;
     padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .colums-title {
     display: grid;
-    grid-template-columns: 1.5fr 2fr 2.5fr 120px 80px; 
-    gap: 20px;
-    font-weight: bold;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #10441b;
-    margin-top: 20px;
-}
-
-.fila-registro {
-    display: grid;
-    grid-template-columns: 1.5fr 2fr 2.5fr 120px 80px; 
-    gap: 20px; 
-    padding: 15px 0;
-    border-bottom: 1px solid #10441b;
-    align-items: center;
-    transition: background 0.2s;
-}
-
-.container-filtros {
-    max-width: 900px;
-    margin: 20px auto 0 auto;
-    padding: 0 20px;
-    display: flex;
+    grid-template-columns: 1.5fr 1.5fr 1.5fr 2.5fr; 
     gap: 15px;
-    align-items: center;
-}
-
-.container-filtros select {
-    padding: 8px;
-    background-color: #1c4e17;
-    color: white;
-    border: 1px solid #57e491;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button {
-    background-color: #1c4e17;
-    color: white;
-    border: 1px solid #57e491;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-family: sans-serif;
     font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    padding: 12px;
+    border-bottom: 2px solid #57e491;
+    color: #57e491;
 }
 
-.button:hover {
-    background-color: #57e491;
-    color: #10441b;
-    box-shadow: 0 0 10px rgba(87, 228, 145, 0.4);
+#list-avistamientos .colums-title {
+    border-bottom: 1px solid #2a5a2a;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#list-avistamientos .colums-title:hover {
+    background-color: #2a5a2a;
 }
 
 .paginacion {
@@ -80,14 +79,14 @@ body {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin-top: 30px;
+    margin-top: 25px;
     padding-top: 15px;
-    border-top: 2px solid #10441b;
+    border-top: 1px solid #57e491;
 }
 
-.btn-pag {
+.btn-pag, .button {
     padding: 8px 16px;
-    background-color: #1c4e17;
+    background-color: #10441b;
     color: white;
     border: 1px solid #57e491;
     border-radius: 4px;
@@ -96,9 +95,10 @@ body {
     transition: all 0.3s;
 }
 
-.btn-pag:hover:not(:disabled) {
+.btn-pag:hover:not(:disabled), .button:hover {
     background-color: #57e491;
     color: #10441b;
+    box-shadow: 0 0 10px rgba(87, 228, 145, 0.4);
 }
 
 .btn-pag:disabled {
@@ -111,4 +111,48 @@ body {
 #indicador-pagina {
     font-weight: bold;
     color: #57e491;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: #1c4e17;
+    border: 2px solid #57e491;
+    border-radius: 8px;
+    padding: 25px;
+    max-width: 550px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    color: white;
+}
+
+.modal-content h2, .modal-content h3 {
+    color: #57e491;
+    margin-top: 0;
+}
+
+.galeria-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.galeria-media img, .galeria-media video {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 6px;
+    border: 1px solid #57e491;
+    object-fit: cover;
 }

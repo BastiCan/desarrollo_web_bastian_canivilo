@@ -76,11 +76,19 @@ class Avistamiento(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "nombre": self.ave.nombre if self.ave else "Desconocido",
             "lugar": self.lugar,
-            "fecha_hora": self.fecha_hora,
-            "descripcion": self.descripcion
-        }    
+            "fecha_hora": self.fecha_hora.strftime("%Y-%m-%d %H:%M") if self.fecha_hora else "",
+            "descripcion": self.descripcion,
+            "ave_nombre": self.ave.nombre if hasattr(self, 'ave') and self.ave else "",
+            "voluntario_nombre": self.voluntario.nombre if hasattr(self, 'voluntario') and self.voluntario else "",
+            "registros": [
+                {
+                    "id": r.id,
+                    "ruta_archivo": r.ruta_archivo,
+                    "nombre_archivo": r.nombre_archivo
+                } for r in self.registros
+            ] if hasattr(self, 'registros') else []
+        }   
 
 
 class Registro(Base):
@@ -131,8 +139,15 @@ def create_register(ruta_archivo, nombre_archivo, avistamiento_id):
     
 
 def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
-    session = SessionLocal()
-    new_avistamient = Avistamiento(voluntario_id=voluntario_id, ave_id=ave_id, fecha_hora=fecha_hora, lugar=lugar, descripcion=descripcion)
-    session.add(new_avistamient)
-    session.commit()
-    session.close()
+    with SessionLocal() as session:
+        nuevo = Avistamiento(
+            voluntario_id=voluntario_id,
+            ave_id=ave_id,
+            fecha_hora=fecha_hora,
+            lugar=lugar,
+            descripcion=descripcion
+        )
+        session.add(nuevo)
+        session.commit()
+        session.refresh(nuevo) 
+        return nuevo

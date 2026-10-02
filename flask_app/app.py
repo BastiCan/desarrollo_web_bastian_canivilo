@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
-from werkzeug.utils import secure_filename
 from datetime import datetime
-#import hashlib
+import hashlib
 import filetype
 import os
 from database.db import (

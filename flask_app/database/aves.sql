@@ -1,3 +1,4 @@
+-- Active: 1790540674696@@127.0.0.1@3306@tarea2
 INSERT INTO ave (nombre) values ("Aguila");
 INSERT INTO ave (nombre) values ("Aguila pescadora");
 INSERT INTO ave (nombre) values ("Aguilucho");

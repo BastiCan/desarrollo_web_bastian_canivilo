@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, jsonify
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import hashlib
+import html
 import filetype
 import os
 from database.db import (
@@ -12,7 +13,10 @@ from database.db import (
     create_avistamient,
     create_register,
     create_comentario,
-    get_comentarios_by_avistamiento
+    get_comentarios_by_avistamiento,
+    get_stats_avistamientos_por_dia,
+    get_stats_avistamientos_por_tipo,
+    get_stats_voluntarios_por_comuna
 )
 
 
@@ -157,8 +161,64 @@ def listado():
 @app.route("/estadisticas")
 def estadisticas():
     return render_template("html/estadisticas.html")
-    
 
+@app.route("/api/estadisticas")
+def api_estadisticas():
+    dias = get_stats_avistamientos_por_dia()
+    tipos = get_stats_avistamientos_por_tipo()
+    voluntarios = get_stats_voluntarios_por_comuna()
+    return jsonify({
+        "grafico_dias": dias,
+        "grafico_tipos": tipos, 
+        "grafico_voluntarios": voluntarios
+    })
+
+@app.route("/api/avistamientos/<int:avistamiento_id>/comentarios", methods=["GET"])
+def api_get_comentarios(avistamiento_id):
+    """Obtiene el listado de comentarios para un avistamiento"""
+    comentarios = get_comentarios_by_avistamiento(avistamiento_id)
+    return jsonify({"comentarios": comentarios})
+
+
+@app.route("/api/avistamientos/<int:avistamiento_id>/comentarios", methods=["POST"])
+def api_add_comentario(avistamiento_id):
+    """Agrega un nuevo comentario validando del lado del servidor"""
+    datos = request.get_json(silent=True) or request.form
+
+    nombre = html.escape(str(datos.get("nombre", "")).strip())
+    texto = html.escape(str(datos.get("texto", "")).strip())
+
+    # Validaciones del lado del servidor
+    if not nombre or len(nombre) < 3 or len(nombre) > 50:
+        return jsonify({
+            "success": False,
+            "error": "El nombre del comentarista es obligatorio y debe tener entre 3 y 50 caracteres."
+        }), 400
+
+    if not texto or len(texto) < 5 or len(texto) > 300:
+        return jsonify({
+            "success": False,
+            "error": "El texto del comentario es obligatorio y debe tener entre 5 y 300 caracteres."
+        }), 400
+
+    try:
+        nuevo_comentario = create_comentario(
+            nombre=nombre,
+            texto=texto,
+            avistamiento_id=avistamiento_id
+        )
+        return jsonify({
+            "success": True,
+            "comentario": nuevo_comentario,
+            "message": "Comentario agregado exitosamente."
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": "Error interno al guardar el comentario."
+        }), 500
+
+    
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 

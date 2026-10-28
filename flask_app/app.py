@@ -10,7 +10,9 @@ from database.db import (
     get_voluntary_by_email,
     create_voluntary,
     create_avistamient,
-    create_register
+    create_register,
+    create_comentario,
+    get_comentarios_by_avistamiento
 )
 
 

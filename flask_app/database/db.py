@@ -171,3 +171,23 @@ def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
         session.commit()
         session.refresh(nuevo) 
         return nuevo
+
+#  --- NUEVAS FUNCIONES IMPLEMENTADAS PARA LA TAREA 3 ---
+
+def create_comentario(nombre, texto, avistamiento_id):
+    with SessionLocal() as session:
+        nuevo = Comentario(
+            nombre=nombre,
+            texto=texto,
+            fecha=datetime.now(),
+            avistamiento_id=avistamiento_id
+        )
+        session.add(nuevo)
+        session.commit()
+        session.refresh(nuevo)
+        return nuevo.to_dict()
+
+def get_comentarios_by_avistamiento(avistamiento_id):
+    with SessionLocal() as session:
+        Comentarios = session.query(Comentario).filter_by(avistamiento_id=avistamiento_id).order_by(Comentario.fecha.desc()).all()
+        return [c.to_disc() for c in Comentarios] 

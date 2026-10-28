@@ -174,6 +174,7 @@ def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
 
 #  --- NUEVAS FUNCIONES IMPLEMENTADAS PARA LA TAREA 3 ---
 
+# -- Para los comentarios --
 def create_comentario(nombre, texto, avistamiento_id):
     with SessionLocal() as session:
         nuevo = Comentario(
@@ -191,3 +192,37 @@ def get_comentarios_by_avistamiento(avistamiento_id):
     with SessionLocal() as session:
         Comentarios = session.query(Comentario).filter_by(avistamiento_id=avistamiento_id).order_by(Comentario.fecha.desc()).all()
         return [c.to_disc() for c in Comentarios] 
+
+# -- Para las Estadisticas --
+def get_stats_avistamientos_por_dia(): ##Gráfico de Líneas
+    with SessionLocal() as session:
+        resultados = session.query(
+            func.date_format(Avistamiento.fecha_hora, '%Y-%m-%d').label('dia'),
+            func.count(Avistamiento.id).label('cantidad')
+        ).group_by('dia').order_by('dia').all()
+
+        labels = [r.dia for r in resultados]
+        data = [r.cantidad for r in resultados]
+        return {"labels": labels, "data": data}
+
+def get_stats_avistamientos_por_tipo():
+    with SessionLocal() as session: ##Gráfico de Torta
+            resultados = session.query(
+                Ave.nombre.label('tipo'),
+                func.count(Avistamiento.id).label('cantidad')
+            ).join(Avistamiento, Avistamiento.ave_id == Ave.id).group_by(Ave.id, Ave.nombre).all()
+    
+            labels = [r.tipos for r in resultados]
+            data = [r.cantidad for r in resultados]
+            return {"labels": labels, "data": data}
+
+def get_stats_voluntarios_por_comuna():
+    with SessionLocal() as session: ##Gráfico de Barras
+                resultados = session.query(
+                    Comuna.nombre.label('comuna'),
+                    func.count(Avistamiento.id).label('cantidad')
+                ).join(Voluntario, Voluntario.comuna_id == Comuna.id).group_by(Comuna.id, Comuna.nombre).order_by(func.count(Voluntario.id).desc()).all()
+        
+                labels = [r.comuna.strip() for r in resultados]
+                data = [r.cantidad for r in resultados]
+                return {"labels": labels, "data": data}

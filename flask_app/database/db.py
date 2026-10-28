@@ -57,7 +57,7 @@ class Ave(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(80), nullable=False)
 
-    avistamientos = relationship("Avistamiento", back_populates="ave")
+    avistamientos = relationship("Ave", back_populates="ave") if False else relationship("Avistamiento", back_populates="ave")
 
 
 class Avistamiento(Base):
@@ -73,6 +73,7 @@ class Avistamiento(Base):
     voluntario = relationship("Voluntario", back_populates="avistamientos")
     ave = relationship("Ave", back_populates="avistamientos")
     registros = relationship("Registro", back_populates="avistamiento")
+    comentarios = relationship("Comentario", back_populates="avistamiento", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -102,6 +103,7 @@ class Registro(Base):
 
     avistamiento = relationship("Avistamiento", back_populates="registros")
 
+
 class Comentario(Base):
     __tablename__ = 'comentario'
 
@@ -109,9 +111,9 @@ class Comentario(Base):
     nombre = Column(String(80), nullable=False)
     texto = Column(String(300), nullable=False)
     fecha = Column(DateTime, default=datetime.now, nullable=False)
-    Avistamiento_id = Column(Integer, ForeignKey('avistamiento.id'), nullable=False)
+    avistamiento_id = Column(Integer, ForeignKey('avistamiento.id'), nullable=False)
 
-    Avistamiento = relationship("Avistamiento", back_populates="comentarios")
+    avistamiento = relationship("Avistamiento", back_populates="comentarios")
 
     def to_dict(self):
         return {
@@ -119,45 +121,40 @@ class Comentario(Base):
             "nombre": self.nombre,
             "texto": self.texto,
             "fecha": self.fecha.strftime("%Y-%m-%d %H:%M:%S") if self.fecha else "",
-            "avistamiento_id": self.Avistamiento_id
+            "avistamiento_id": self.avistamiento_id
         }
 
 # --- Database Functions ---
 
 def get_voluntary_by_id(id):
-    session = SessionLocal()
-    user = session.query(Voluntario).filter_by(id=id).first()
-    session.close()
-    return user 
+    with SessionLocal() as session:
+        return session.query(Voluntario).filter_by(id=id).first()
 
 def get_voluntary_by_email(email):
-    session = SessionLocal()
-    user = session.query(Voluntario).filter_by(email=email).first()
-    session.close()
-    return user
+    with SessionLocal() as session:
+        return session.query(Voluntario).filter_by(email=email).first()
 
 def get_voluntary_by_name(nombre):
-    session = SessionLocal()
-    user = session.query(Voluntario).filter_by(nombre=nombre).first()
-    session.close()
-    return user
+    with SessionLocal() as session:
+        return session.query(Voluntario).filter_by(nombre=nombre).first()
 
 def create_voluntary(nombre, email, telefono, fecha_registro, comuna_id):   
-    session = SessionLocal()
-    new_voluntary = Voluntario(nombre=nombre, email=email, telefono=telefono, fecha_registro= fecha_registro, comuna_id = comuna_id)
-    session.add(new_voluntary)
-    session.commit()
-    session.close()
-
+    with SessionLocal() as session:
+        new_voluntary = Voluntario(
+            nombre=nombre, email=email, telefono=telefono,
+            fecha_registro=fecha_registro, comuna_id=comuna_id
+        )
+        session.add(new_voluntary)
+        session.commit()
+        session.refresh(new_voluntary)
+        return new_voluntary
 
 def create_register(ruta_archivo, nombre_archivo, avistamiento_id):
-    session = SessionLocal()
-    new_register = Registro(ruta_archivo=ruta_archivo, nombre_archivo=nombre_archivo, avistamiento_id=avistamiento_id)
-    session.add(new_register)
-    session.commit()
-    session.close()
-    
-    
+    with SessionLocal() as session:
+        new_register = Registro(ruta_archivo=ruta_archivo, nombre_archivo=nombre_archivo, avistamiento_id=avistamiento_id)
+        session.add(new_register)
+        session.commit()
+
 def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
     with SessionLocal() as session:
         nuevo = Avistamiento(
@@ -172,7 +169,7 @@ def create_avistamient(voluntario_id, ave_id, fecha_hora, lugar, descripcion):
         session.refresh(nuevo) 
         return nuevo
 
-#  --- NUEVAS FUNCIONES IMPLEMENTADAS PARA LA TAREA 3 ---
+# --- FUNCIONES PARA LA TAREA 3 ---
 
 # -- Para los comentarios --
 def create_comentario(nombre, texto, avistamiento_id):
@@ -190,12 +187,12 @@ def create_comentario(nombre, texto, avistamiento_id):
 
 def get_comentarios_by_avistamiento(avistamiento_id):
     with SessionLocal() as session:
-        Comentarios = session.query(Comentario).filter_by(avistamiento_id=avistamiento_id).order_by(Comentario.fecha.desc()).all()
-        return [c.to_disc() for c in Comentarios] 
+        comentarios = session.query(Comentario).filter_by(avistamiento_id=avistamiento_id).order_by(Comentario.fecha.desc()).all()
+        return [c.to_dict() for c in comentarios]
 
-# -- Para las Estadisticas --
-def get_stats_avistamientos_por_dia(): ##Gráfico de Líneas
-    with SessionLocal() as session:
+# -- Para los gráficos --
+def get_stats_avistamientos_por_dia():
+    with SessionLocal() as session: ##Grafico de Líneas
         resultados = session.query(
             func.date_format(Avistamiento.fecha_hora, '%Y-%m-%d').label('dia'),
             func.count(Avistamiento.id).label('cantidad')
@@ -206,23 +203,23 @@ def get_stats_avistamientos_por_dia(): ##Gráfico de Líneas
         return {"labels": labels, "data": data}
 
 def get_stats_avistamientos_por_tipo():
-    with SessionLocal() as session: ##Gráfico de Torta
-            resultados = session.query(
-                Ave.nombre.label('tipo'),
-                func.count(Avistamiento.id).label('cantidad')
-            ).join(Avistamiento, Avistamiento.ave_id == Ave.id).group_by(Ave.id, Ave.nombre).all()
-    
-            labels = [r.tipos for r in resultados]
-            data = [r.cantidad for r in resultados]
-            return {"labels": labels, "data": data}
+    with SessionLocal() as session: ##Grafico de Torta
+        resultados = session.query(
+            Ave.nombre.label('tipo'),
+            func.count(Avistamiento.id).label('cantidad')
+        ).join(Avistamiento, Avistamiento.ave_id == Ave.id).group_by(Ave.id, Ave.nombre).all()
+
+        labels = [r.tipo for r in resultados]
+        data = [r.cantidad for r in resultados]
+        return {"labels": labels, "data": data}
 
 def get_stats_voluntarios_por_comuna():
-    with SessionLocal() as session: ##Gráfico de Barras
-                resultados = session.query(
-                    Comuna.nombre.label('comuna'),
-                    func.count(Avistamiento.id).label('cantidad')
-                ).join(Voluntario, Voluntario.comuna_id == Comuna.id).group_by(Comuna.id, Comuna.nombre).order_by(func.count(Voluntario.id).desc()).all()
-        
-                labels = [r.comuna.strip() for r in resultados]
-                data = [r.cantidad for r in resultados]
-                return {"labels": labels, "data": data}
+    with SessionLocal() as session: ##Grafico de Barras
+        resultados = session.query(
+            Comuna.nombre.label('comuna'),
+            func.count(Voluntario.id).label('cantidad')
+        ).join(Voluntario, Voluntario.comuna_id == Comuna.id).group_by(Comuna.id, Comuna.nombre).order_by(func.count(Voluntario.id).desc()).all()
+
+        labels = [r.comuna.strip() for r in resultados]
+        data = [r.cantidad for r in resultados]
+        return {"labels": labels, "data": data}

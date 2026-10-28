@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey, DateTime, Text
+from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey, DateTime, Text, func
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from datetime import datetime
 
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
@@ -101,6 +102,25 @@ class Registro(Base):
 
     avistamiento = relationship("Avistamiento", back_populates="registros")
 
+class Comentario(Base):
+    __tablename__ = 'comentario'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(80), nullable=False)
+    texto = Column(String(300), nullable=False)
+    fecha = Column(DateTime, default=datetime.now, nullable=False)
+    Avistamiento_id = Column(Integer, ForeignKey('avistamiento.id'), nullable=False)
+
+    Avistamiento = relationship("Avistamiento", back_populates="comentarios")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre,
+            "texto": self.texto,
+            "fecha": self.fecha.strftime("%Y-%m-%d %H:%M:%S") if self.fecha else "",
+            "avistamiento_id": self.Avistamiento_id
+        }
 
 # --- Database Functions ---
 

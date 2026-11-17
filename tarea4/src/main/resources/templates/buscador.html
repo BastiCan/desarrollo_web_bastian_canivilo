@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Buscador de Avistamientos </title>
+    <link rel="stylesheet" type="text/css" href="/css/buscador.css">
+</head>
+<body>
+    <main class="container">
+        <header class="header-box">
+            <h1> Buscador y Evaluación de Avistamientos </h1>
+            <p> Escribe el nombre de un ave, voluntario o comuna para buscar en tiempo real </p>
+        </header>
+
+        <section class="search-section" aria-label="Formulario de búsqueda">
+            <form id="form-busqueda">
+                <label for="input-busqueda"> Buscar avistamiento: </label>
+                <input type="text" id="input-busqueda" name="q" placeholder="Ej: Chincol, Bastián, Santiago..." autocomplete="off">
+            </form>
+        </section>
+
+        <section class="results-section" aria-label="Resultados de búsqueda">
+            <p id="mensaje-estado" class="mensaje-info"> Ingresa caracteres para comenzar la búsqueda </p>
+
+            <div id="contenedor-tabla" class="table-wrapper" hidden>
+                <table class="tabla-resultados">
+                    <thead>
+                        <tr>
+                            <th>Voluntario</th>
+                            <th>Día</th>
+                            <th>Ave</th>
+                            <th>Comuna</th>
+                            <th>Nota</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-resultados"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="nav-footer">
+            <a href="http://127.0.0.1:5000/inicio" class="btn-volver"> Volver al Inicio </a>
+        </div>
+    </main>
+
+    <!-- Para poder evaluar el avistamiento -->
+    <div id="modal-evaluar" class="modal-overlay" hidden>
+        <div class="modal-box">
+            <h2> Evaluar Avistamiento </h2>
+            <p id="modal-detalle-avistamiento"></p>
+
+            <form id="form-evaluar">
+                <label for="select-nota"> Selecciona una nota (1 a 7): </label>
+                <select id="select-nota" name="nota" required>
+                    <option value="">-- Elige una nota --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+
+                <p id="modal-error" class="mensaje-error" hidden></p>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primario"> Guardar Nota </button>
+                    <button type="button" id="btn-cancelar-modal" class="btn-secundario"> Cancelar </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/buscador.js"></script>
+</body>
+</html>

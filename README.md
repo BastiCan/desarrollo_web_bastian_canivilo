@@ -15,6 +15,7 @@ python -m venv venv \
 pip install -r requeriments.txt \
 python flask_app/app.py
 
-Y por el lado de la tarea, solamente presionar 'Run' en el archivo de "Tarea4Application.java"
+Y por el lado de la tarea4, solamente presionar 'Run' en el archivo de "Tarea4Application.java" que esta dentro de src/main/java.
+
 Con estas dos cosas hechas, deberia funcionar de buena manera la Tarea en cuestión.
 

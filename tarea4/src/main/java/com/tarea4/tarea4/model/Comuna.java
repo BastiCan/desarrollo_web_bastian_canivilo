@@ -12,7 +12,7 @@ public class Comuna {
     @Column(nullable = false, length = 200)
     private String nombre;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
